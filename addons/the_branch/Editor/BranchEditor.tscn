@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/the_branch/Editor/BranchEditor.gd" type="Script" id=1]
+
+[node name="BranchEditor" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NoNodeMessage" type="RichTextLabel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -418.5
+margin_top = -9.0
+margin_right = 418.5
+margin_bottom = 9.0
+bbcode_enabled = true
+bbcode_text = "[center]Please select a [color=#AAAAFF]BranchController[/color] node in the [color=#AAAAFF]Scene Tab[/color] to view or edit its attached JSON file.[/center]"
+text = "Please select a BranchController node in the Scene Tab to view or edit its attached JSON file."
+__meta__ = {
+"_edit_use_anchors_": false
+}
