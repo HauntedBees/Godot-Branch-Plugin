@@ -9,12 +9,24 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "GraphNode",
+"class": "BaseBNode",
+"language": "GDScript",
+"path": "res://addons/the_branch/Nodes/BaseBNode.gd"
+}, {
+"base": "Node",
+"class": "BranchController",
+"language": "GDScript",
+"path": "res://addons/the_branch/BranchController.gd"
+}, {
 "base": "Control",
 "class": "BranchEditor",
 "language": "GDScript",
 "path": "res://addons/the_branch/Editor/BranchEditor.gd"
 } ]
 _global_script_class_icons={
+"BaseBNode": "",
+"BranchController": "",
 "BranchEditor": ""
 }
 
