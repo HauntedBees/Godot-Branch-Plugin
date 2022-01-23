@@ -13,6 +13,7 @@ __meta__ = {
 }
 
 [node name="NoNodeMessage" type="RichTextLabel" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -27,3 +28,34 @@ text = "Please select a BranchController node in the Scene Tab to view or edit i
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AddNewMessage" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="AddNewMessage"]
+anchor_right = 1.0
+margin_top = 221.0
+margin_bottom = 247.0
+size_flags_horizontal = 3
+bbcode_enabled = true
+bbcode_text = "[center]The selected [color=#AAAAFF]BranchController[/color] node does not have an associated JSON file. Add an existing one in the [color=#AAAAFF]Inspector Tab[/color] or click the button to create a new one.[/center]"
+text = "The selected BranchController node does not have an associated JSON file. Add an existing one in the Inspector Tab or click the button to create a new one."
+
+[node name="CreateNewButton" type="Button" parent="AddNewMessage"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -123.0
+margin_top = -37.5
+margin_right = 123.0
+margin_bottom = 37.5
+text = "Create new Branch JSON File"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="AddNewMessage/CreateNewButton" to="." method="_on_CreateNewButton_pressed"]
