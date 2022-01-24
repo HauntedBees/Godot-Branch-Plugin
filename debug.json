@@ -1,1 +1,1 @@
-[{"name":"GraphNode","params":[{"name":"Shits","type":1,"value":69},{"name":"Farts","type":1,"value":420},{"name":"Dumb","type":3,"value":true}],"pos_x":240,"pos_y":80,"rect_x":209,"rect_y":211,"speaker":"ass","text":"yeah\t","type":"BDialog"},{"connections":[],"is_connection_list":true}]
+[{"name":"GraphNode","params":[{"name":"Shits","type":1,"value":69},{"name":"Dumb","type":3,"value":true}],"pos_x":240,"pos_y":80,"rect_x":209,"rect_y":211,"speaker":"ass","text":"yeah\t","type":"BDialog"},{"connections":[],"is_connection_list":true}]

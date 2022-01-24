@@ -48,6 +48,7 @@ func _ready():
 	speaker_node.text = speaker
 	speaker_node.connect("text_changed", self, "_on_speaker_change")
 	add_child(speaker_node)
+	add_child(separator())
 	
 	body_node = TextEdit.new()
 	body_node.hint_tooltip = "This node is for entering text that will be displayed to the player."
@@ -57,6 +58,7 @@ func _ready():
 	body_node.rect_min_size = Vector2(0, 60)
 	body_node.connect("text_changed", self, "_on_value_change", [body_node])
 	add_child(body_node)
+	add_child(separator())
 	
 	add_params_button = Button.new()
 	add_params_button.text = "Add Additional Parameter"
@@ -64,6 +66,7 @@ func _ready():
 	add_params_button.size_flags_horizontal = SIZE_EXPAND_FILL
 	add_params_button.connect("pressed", self, "_add_parameter")
 	add_child(add_params_button)
+	add_child(separator())
 	
 	set_slot(0, true, 0, SLOT_COLOR, true, 0, SLOT_COLOR)
 

@@ -2,6 +2,8 @@ tool
 class_name BaseBNode
 extends GraphNode
 
+var separator_theme:Theme = preload("res://addons/the_branch/Editor/separator.tres")
+
 signal change_made
 signal delete_node(name)
 
@@ -48,3 +50,8 @@ func restore(dict:Dictionary):
 	rect_size = Vector2(dict["rect_x"], dict["rect_y"])
 	addtl_restore(dict)
 func addtl_restore(dict:Dictionary): return
+
+func separator() -> HSeparator:
+	var h := HSeparator.new()
+	h.theme = separator_theme
+	return h

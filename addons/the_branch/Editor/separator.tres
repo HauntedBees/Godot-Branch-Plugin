@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=2]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[resource]
+HSeparator/constants/separation = 4
+HSeparator/styles/separator = SubResource( 1 )
