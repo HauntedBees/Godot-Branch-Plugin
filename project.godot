@@ -9,10 +9,40 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "PanelContainer",
+"class": "BChoice",
+"language": "GDScript",
+"path": "res://addons/the_branch/Fragments/BChoice.gd"
+}, {
+"base": "HBoxContainer",
+"class": "BDeleteInput",
+"language": "GDScript",
+"path": "res://addons/the_branch/Fragments/BDeleteInput.gd"
+}, {
+"base": "BaseBNode",
+"class": "BDialog",
+"language": "GDScript",
+"path": "res://addons/the_branch/Nodes/BDialog.gd"
+}, {
+"base": "BDialog",
+"class": "BDialogChoice",
+"language": "GDScript",
+"path": "res://addons/the_branch/Nodes/BDialogChoice.gd"
+}, {
 "base": "GraphEdit",
 "class": "BGraphEdit",
 "language": "GDScript",
 "path": "res://addons/the_branch/Editor/BGraphEdit.gd"
+}, {
+"base": "PanelContainer",
+"class": "BInnerFunction",
+"language": "GDScript",
+"path": "res://addons/the_branch/Fragments/BInnerFunction.gd"
+}, {
+"base": "Resource",
+"class": "BParamHandler",
+"language": "GDScript",
+"path": "res://addons/the_branch/Fragments/BParamHandler.gd"
 }, {
 "base": "HBoxContainer",
 "class": "BParameter",
@@ -40,7 +70,13 @@ _global_script_classes=[ {
 "path": "res://addons/the_branch/Editor/BranchEditor.gd"
 } ]
 _global_script_class_icons={
+"BChoice": "",
+"BDeleteInput": "",
+"BDialog": "",
+"BDialogChoice": "",
 "BGraphEdit": "",
+"BInnerFunction": "",
+"BParamHandler": "",
 "BParameter": "",
 "BParameterEdit": "",
 "BaseBNode": "",

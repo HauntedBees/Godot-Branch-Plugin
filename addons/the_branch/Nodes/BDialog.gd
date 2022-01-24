@@ -1,4 +1,5 @@
 tool
+class_name BDialog
 extends BaseBNode
 
 func display_name() -> String: return "Dialog"
@@ -6,11 +7,11 @@ func hint() -> String: return "This node is for entering text that will be displ
 
 var speaker_node:LineEdit
 var body_node:TextEdit
-var add_params_button:Button
+var param_container:VBoxContainer
 
 var speaker := "" setget set_speaker
 var value := "" setget set_value
-var parameters := []
+var param_info:BParamHandler
 
 func set_speaker(s:String):
 	speaker = s
@@ -29,16 +30,12 @@ func addtl_save(d:Dictionary) -> Dictionary:
 	d["type"] = "BDialog"
 	d["text"] = value
 	d["speaker"] = speaker
-	var d_params := []
-	for p in parameters:
-		d_params.append((p as BParameter).get_as_dict())
-	d["params"] = d_params
+	d["params"] = param_info.get_params_dict_array()
 	return d
 func addtl_restore(d:Dictionary):
 	set_value(d["text"])
 	set_speaker(d["speaker"])
-	for p in d["params"]:
-		_add_parameter(p)
+	param_info.restore_params_from_dict_array(d["params"], param_container, self)
 
 func _ready():
 	speaker_node = LineEdit.new()
@@ -60,28 +57,13 @@ func _ready():
 	add_child(body_node)
 	add_child(separator())
 	
-	add_params_button = Button.new()
-	add_params_button.text = "Add Additional Parameter"
-	add_params_button.hint_tooltip = "Add some optional metadata to this dialog node."
-	add_params_button.size_flags_horizontal = SIZE_EXPAND_FILL
-	add_params_button.connect("pressed", self, "_add_parameter")
-	add_child(add_params_button)
+	param_container = VBoxContainer.new()
+
+	param_info = BParamHandler.new()
+	add_child(param_info.get_params_button(param_container, self, "Add Additional Parameter", "Add some optional metadata to this dialog node."))
 	add_child(separator())
 	
+	param_container.size_flags_horizontal = SIZE_EXPAND_FILL
+	add_child(param_container)
+	
 	set_slot(0, true, 0, SLOT_COLOR, true, 0, SLOT_COLOR)
-
-func _add_parameter(d:Dictionary = {}):
-	var param := BParameter.new()
-	param.connect("delete_param", self, "_on_param_delete", [param])
-	param.connect("change_made", self, "_on_param_change")
-	parameters.append(param)
-	add_child(param)
-	if d.has("name"):
-		param.field_name = d["name"]
-		param.field_type = d["type"]
-		param.set_value(d["value"])
-func _on_param_change(): emit_signal("change_made")
-func _on_param_delete(p:BParameter):
-	emit_signal("change_made")
-	parameters.erase(p)
-	p.queue_free()

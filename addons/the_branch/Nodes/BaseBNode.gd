@@ -22,6 +22,7 @@ func _ready():
 	connect("resize_request", self, "_on_resize_request")
 	connect("dragged", self, "_on_drag_request")
 
+func _on_change(): emit_signal("change_made")
 func _on_close_request():
 	emit_signal("change_made")
 	emit_signal("delete_node", name)

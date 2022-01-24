@@ -4,7 +4,8 @@ extends GraphEdit
 signal change_made
 
 const NODE_TYPES := {
-	"Dialog": preload("res://addons/the_branch/Nodes/BDialog.gd")
+	"Dialog": preload("res://addons/the_branch/Nodes/BDialog.gd"),
+	"Dialog Choice": preload("res://addons/the_branch/Nodes/BDialogChoice.gd")
 }
 
 var selected_node:BaseBNode
