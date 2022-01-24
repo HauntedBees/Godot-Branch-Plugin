@@ -7,7 +7,6 @@ func hint() -> String: return "This node is for entering text that will be displ
 
 var speaker_node:LineEdit
 var body_node:TextEdit
-var param_container:VBoxContainer
 
 var speaker := "" setget set_speaker
 var value := "" setget set_value
@@ -57,7 +56,7 @@ func _ready():
 	add_child(body_node)
 	add_child(separator())
 	
-	param_container = VBoxContainer.new()
+	var param_container := VBoxContainer.new()
 
 	param_info = BParamHandler.new()
 	add_child(param_info.get_params_button(param_container, self, "Add Additional Parameter", "Add some optional metadata to this dialog node."))

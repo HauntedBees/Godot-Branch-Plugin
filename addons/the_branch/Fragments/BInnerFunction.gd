@@ -10,6 +10,7 @@ var function_node:LineEdit
 
 var allow_delete := true setget set_allow_delete
 var function_name := "" setget set_function_name
+var param_info:BParamHandler
 
 func _ready():
 	size_flags_horizontal = SIZE_EXPAND_FILL
@@ -40,6 +41,8 @@ func _ready():
 	source_button.hint_tooltip = "View this function."
 	source_button.connect("pressed", self, "_on_view_source")
 	hb.add_child(source_button)
+	
+	param_info = BParamHandler.new()
 	
 	var add_params_button := Button.new()
 	add_params_button.text = "Add Parameter"
