@@ -21,28 +21,26 @@ func _on_speaker_change(s:String):
 func set_value(s:String):
 	value = s
 	if body_node != null: body_node.text = s
-func _on_value_change(s:String):
-	value = s
+func _on_value_change(t:TextEdit):
+	value = t.text
 	emit_signal("change_made")
 
 func addtl_save(d:Dictionary) -> Dictionary:
-	d["type"] = "dialog"
+	d["type"] = "BDialog"
 	d["text"] = value
 	d["speaker"] = speaker
 	var d_params := []
 	for p in parameters:
-		pass # TODO
+		d_params.append((p as BParameter).get_as_dict())
 	d["params"] = d_params
 	return d
 func addtl_restore(d:Dictionary):
 	set_value(d["text"])
 	set_speaker(d["speaker"])
 	for p in d["params"]:
-		pass # TODO
+		_add_parameter(p)
 
 func _ready():
-	._ready()
-	
 	speaker_node = LineEdit.new()
 	speaker_node.placeholder_text = "Speaker (optional)"
 	speaker_node.hint_tooltip = "Specify a speaker name for the dialog."
@@ -57,7 +55,7 @@ func _ready():
 	body_node.size_flags_vertical = SIZE_EXPAND_FILL
 	body_node.text = value
 	body_node.rect_min_size = Vector2(0, 60)
-	body_node.connect("text_changed", self, "_on_value_change")
+	body_node.connect("text_changed", self, "_on_value_change", [body_node])
 	add_child(body_node)
 	
 	add_params_button = Button.new()
@@ -69,5 +67,18 @@ func _ready():
 	
 	set_slot(0, true, 0, SLOT_COLOR, true, 0, SLOT_COLOR)
 
-func _add_parameter():
-	pass
+func _add_parameter(d:Dictionary = {}):
+	var param := BParameter.new()
+	param.connect("delete_param", self, "_on_param_delete", [param])
+	param.connect("change_made", self, "_on_param_change")
+	parameters.append(param)
+	add_child(param)
+	if d.has("name"):
+		param.field_name = d["name"]
+		param.field_type = d["type"]
+		param.set_value(d["value"])
+func _on_param_change(): emit_signal("change_made")
+func _on_param_delete(p:BParameter):
+	emit_signal("change_made")
+	parameters.erase(p)
+	p.queue_free()

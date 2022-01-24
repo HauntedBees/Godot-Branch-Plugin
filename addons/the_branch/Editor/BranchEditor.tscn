@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://addons/the_branch/Editor/BranchEditor.gd" type="Script" id=1]
 [ext_resource path="res://addons/the_branch/Editor/BGraphEdit.gd" type="Script" id=2]
 [ext_resource path="res://addons/the_branch/Editor/NewButton.gd" type="Script" id=3]
+[ext_resource path="res://addons/the_branch/Icons/Edit.svg" type="Texture" id=4]
 
 [node name="BranchEditor" type="Control"]
 anchor_right = 1.0
@@ -89,17 +90,95 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 246.0
 margin_right = -268.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Code" type="MenuButton" parent="MainView/Buttons/InnerContainer"]
+margin_left = 43.0
+margin_right = 87.0
+margin_bottom = 30.0
+hint_tooltip = "Nodes that execute code, such as function calls and variable assignments."
+focus_mode = 2
+text = "Code"
+flat = false
+items = [ "Function Call", null, 0, false, false, 0, 0, null, "", false, "Function Sequence", null, 0, false, false, 1, 0, null, "", false, "Variable Assignment", null, 0, false, false, 2, 0, null, "", false ]
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Branch" type="MenuButton" parent="MainView/Buttons/InnerContainer"]
+margin_left = 91.0
+margin_right = 147.0
+margin_bottom = 30.0
+hint_tooltip = "Nodes that cause branching paths based on some condition."
+focus_mode = 2
+text = "Branch"
+flat = false
+items = [ "Boolean Condition", null, 0, false, false, 0, 0, null, "", false, "Boolean Sequence", null, 0, false, false, 1, 0, null, "", false, "Variable Comparison", null, 0, false, false, 2, 0, null, "", false, "Random Condition", null, 0, false, false, 3, 0, null, "", false ]
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Dialog" type="MenuButton" parent="MainView/Buttons/InnerContainer"]
-margin_right = 52.0
+margin_left = 151.0
+margin_right = 203.0
 margin_bottom = 30.0
+hint_tooltip = "Nodes for dialog trees."
 text = "Dialog"
 flat = false
 items = [ "Dialog", null, 0, false, false, 0, 0, null, "", false, "Dialog Choice", null, 0, false, false, 1, 0, null, "", false ]
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Flow" type="MenuButton" parent="MainView/Buttons/InnerContainer"]
+margin_left = 207.0
+margin_right = 248.0
+margin_bottom = 30.0
+hint_tooltip = "Nodes for control flow like ending or restarting."
+focus_mode = 2
+text = "Flow"
+flat = false
+items = [ "End", null, 0, false, false, 0, 0, null, "", false, "Restart", null, 0, false, false, 1, 0, null, "", false ]
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Comment" type="Button" parent="MainView/Buttons/InnerContainer"]
+margin_left = 252.0
+margin_right = 327.0
+margin_bottom = 30.0
+hint_tooltip = "Add a Comment node to leave notes and comments."
+text = "Comment"
+
+[node name="Template" type="MenuButton" parent="MainView/Buttons/InnerContainer"]
+margin_left = 331.0
+margin_right = 403.0
+margin_bottom = 30.0
+hint_tooltip = "Add preconfigured nodes you've saved as templates."
+text = "Template"
+flat = false
+
+[node name="SaveButton" type="Button" parent="MainView/Buttons/InnerContainer"]
+margin_left = 407.0
+margin_right = 466.0
+margin_bottom = 30.0
+text = "Save"
+icon = ExtResource( 4 )
+
+[node name="Button" type="Button" parent="MainView/Buttons"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -220.0
+margin_bottom = 30.0
+disabled = true
+text = "Save Selected Node as Template"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -110,4 +189,8 @@ __meta__ = {
 [connection signal="disconnection_request" from="MainView/GraphEdit" to="MainView/GraphEdit" method="_on_disconnection_request"]
 [connection signal="node_selected" from="MainView/GraphEdit" to="MainView/GraphEdit" method="_on_node_selected"]
 [connection signal="node_unselected" from="MainView/GraphEdit" to="MainView/GraphEdit" method="_on_node_unselected"]
+[connection signal="action" from="MainView/Buttons/InnerContainer/Code" to="MainView/GraphEdit" method="add_new_node"]
+[connection signal="action" from="MainView/Buttons/InnerContainer/Branch" to="MainView/GraphEdit" method="add_new_node"]
 [connection signal="action" from="MainView/Buttons/InnerContainer/Dialog" to="MainView/GraphEdit" method="add_new_node"]
+[connection signal="action" from="MainView/Buttons/InnerContainer/Flow" to="MainView/GraphEdit" method="add_new_node"]
+[connection signal="pressed" from="MainView/Buttons/InnerContainer/SaveButton" to="." method="_on_save"]

@@ -33,8 +33,7 @@ func _on_drag_request(from:Vector2, to:Vector2):
 func save() -> Dictionary:
 	var save_dict := {
 		"name": name,
-		"type": "node",
-		"filename": get_filename(),
+		"type": "BaseBNode",
 		"pos_x": offset.x,
 		"pos_y": offset.y,
 		"rect_x": rect_size.x,

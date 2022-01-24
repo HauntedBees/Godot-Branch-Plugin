@@ -4,6 +4,7 @@ extends Control
 signal open_file_dialog
 
 onready var graph:BGraphEdit = $MainView/GraphEdit
+onready var save_button := $MainView/Buttons/InnerContainer/SaveButton
 var active_branch:BranchController
 
 func _ready():
@@ -18,7 +19,7 @@ func _on_CreateNewButton_pressed(): emit_signal("open_file_dialog")
 func got_file_path(path:String):
 	active_branch.file_path = path
 	_set_up_branch(active_branch)
-	_save()
+	_on_save()
 
 func _set_up_branch(branch:BranchController):
 	graph.clear()
@@ -56,18 +57,18 @@ func _open_file(tree_path:String) -> bool:
 		else: _restore_bnode_from_dictionary(c)
 	return true
 func _restore_bnode_from_dictionary(c:Dictionary) -> BaseBNode:
-	var loaded_node:BaseBNode = load(c["filename"]).instance()
+	var loaded_node:BaseBNode = load("res://addons/the_branch/Nodes/%s.gd" % c["type"]).new()
 	graph.add_node(loaded_node)
 	loaded_node.restore(c)
 	return loaded_node
 
-func _on_change_made(): print("SAVED")# save_button.text = "Save (*)"
+func _on_change_made(): save_button.text = "Save (*)"
 
-func _save():
+func _on_save():
 	if active_branch == null || active_branch.file_path == "": return
 	var res := graph.get_save_data()
 	var f := File.new()
 	f.open(active_branch.file_path, File.WRITE)
 	f.store_string(to_json(res))
 	f.close()
-	# save_button.text = "Save"
+	save_button.text = "Save"
