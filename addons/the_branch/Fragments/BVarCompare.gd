@@ -3,12 +3,14 @@ class_name BVarCompare
 extends HBoxContainer
 
 signal change_made
+signal delete
 
 enum { EQUALS, GTE, GT, LTE, LT, NOT, CONTAINS }
 
 var comparison_node:OptionButton
 var value_node:BTypedInput
 var comparison := EQUALS setget set_comparison
+var allow_delete := false
 
 func get_as_dictionary() -> Dictionary:
 	return {
@@ -23,6 +25,14 @@ func restore_from_dictionary(d:Dictionary):
 
 func _ready():
 	size_flags_horizontal = SIZE_EXPAND_FILL
+	
+	if allow_delete:
+		var delete_button := Button.new()
+		delete_button.icon = preload("res://addons/the_branch/Icons/Remove.svg")
+		delete_button.hint_tooltip = "Delete this value."
+		delete_button.connect("pressed", self, "_on_delete")
+		add_child(delete_button)
+	
 	comparison_node = OptionButton.new()
 	comparison_node.add_item("==")
 	comparison_node.add_item(">=")
@@ -47,3 +57,4 @@ func _on_comparison_change(i:int):
 	comparison = i
 	emit_signal("change_made")
 func _on_change_made(): emit_signal("change_made")
+func _on_delete(): emit_signal("delete")
