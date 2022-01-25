@@ -63,7 +63,6 @@ __meta__ = {
 }
 
 [node name="MainView" type="Control" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
@@ -118,7 +117,7 @@ hint_tooltip = "Nodes that cause branching paths based on some condition."
 focus_mode = 2
 text = "Branch"
 flat = false
-items = [ "Boolean Condition", null, 0, false, false, 0, 0, null, "", false, "Boolean Sequence", null, 0, false, false, 1, 0, null, "", false, "Variable Comparison", null, 0, false, false, 2, 0, null, "", false, "Random Condition", null, 0, false, false, 3, 0, null, "", false ]
+items = [ "Boolean Function", null, 0, false, false, 0, 0, null, "", false, "Boolean Sequence", null, 0, false, false, 1, 0, null, "", false, "Variable Comparison", null, 0, false, false, 2, 0, null, "", false, "Random Condition", null, 0, false, false, 3, 0, null, "", false ]
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false

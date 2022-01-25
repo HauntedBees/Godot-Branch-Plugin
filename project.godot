@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "BaseBNode",
+"class": "BBoolFunction",
+"language": "GDScript",
+"path": "res://addons/the_branch/Nodes/BBoolFunction.gd"
+}, {
+"base": "BaseBNode",
 "class": "BBoolSequence",
 "language": "GDScript",
 "path": "res://addons/the_branch/Nodes/BBoolSequence.gd"
@@ -85,6 +90,7 @@ _global_script_classes=[ {
 "path": "res://addons/the_branch/Editor/BranchEditor.gd"
 } ]
 _global_script_class_icons={
+"BBoolFunction": "",
 "BBoolSequence": "",
 "BChoice": "",
 "BDeleteInput": "",
