@@ -10,6 +10,7 @@ const NODE_TYPES := {
 	"Boolean Function": preload("res://addons/the_branch/Nodes/BBoolFunction.gd"),
 	"Boolean Sequence": preload("res://addons/the_branch/Nodes/BBoolSequence.gd"),
 	"Random Condition": preload("res://addons/the_branch/Nodes/BRandom.gd"),
+	"Variable Comparison": preload("res://addons/the_branch/Nodes/BVarComparison.gd"),
 	"Dialog": preload("res://addons/the_branch/Nodes/BDialog.gd"),
 	"Dialog Choice": preload("res://addons/the_branch/Nodes/BDialogChoice.gd")
 }
