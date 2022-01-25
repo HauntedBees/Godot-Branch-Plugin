@@ -2,6 +2,9 @@ class_name BGraphEdit
 extends GraphEdit
 
 signal change_made
+signal bnode_selected
+signal bnode_unselected
+signal refresh_templates
 
 const NODE_TYPES := {
 	"Function Call": preload("res://addons/the_branch/Nodes/BFunctionCall.gd"),
@@ -19,6 +22,8 @@ const NODE_TYPES := {
 }
 
 var selected_node:BaseBNode
+var user_templates := []
+var copied_nodes := []
 
 func get_save_data() -> Array:
 	var res := []
@@ -51,6 +56,12 @@ func add_node(b:BaseBNode, is_new:bool = false):
 		b.offset = scroll_offset + (rect_size - b.rect_size) / 2.0
 		emit_signal("change_made")
 	add_child(b, true)
+func restore_bnode_from_dictionary(c:Dictionary, is_new:bool = false) -> BaseBNode:
+	if is_new: c["name"] = ""
+	var loaded_node:BaseBNode = load("res://addons/the_branch/Nodes/%s.gd" % c["type"]).new()
+	add_node(loaded_node, is_new)
+	loaded_node.restore(c, !is_new)
+	return loaded_node
 
 # Node Signals
 func _on_change_made(): emit_signal("change_made")
@@ -70,12 +81,45 @@ func _on_disconnection_request(from:String, from_port:int, to:String, to_port:in
 	_on_change_made()
 func _on_node_selected(node:GraphNode):
 	if !(node is BaseBNode) || node == selected_node: return
-	# TODO: show save template stuff
-	# TODO: hide if shitty node
+	if node is BStartNode || node is BEndNode || node is BRepeatNode: return
 	selected_node = node
+	emit_signal("bnode_selected")
 func _on_node_unselected(node:GraphNode):
-	#TODO: hide save template stuff
-	if selected_node == node: selected_node = null
+	if selected_node == node:
+		emit_signal("bnode_unselected")
+		selected_node = null
+func _on_copy_nodes_request():
+	var node_name_list := []
+	copied_nodes = []
+	for g in get_children():
+		if g is BaseBNode && g.selected:
+			var n:Dictionary = g.save()
+			n["name"] = ""
+			copied_nodes.append(n)
+			node_name_list.append(g.name)
+func _on_paste_nodes_request():
+	var init_offset:Vector2 = scroll_offset + rect_size / 2.0
+	var real_offset := Vector2.ZERO
+	var offset_set := false
+	for g in get_children():
+		if g is BaseBNode && g.selected:
+			g.selected = false
+	for c in copied_nodes:
+		var n := restore_bnode_from_dictionary(c)
+		n.selected = true
+		if !offset_set:
+			real_offset = init_offset - n.offset
+			n.offset = init_offset
+			offset_set = true
+		else:
+			n.offset += real_offset
+	_on_change_made()
+func _on_delete_nodes_request():
+	for g in get_children():
+		if g is BaseBNode && g.selected:
+			_handle_bnode_deletion(g.name)
+			g.queue_free()
+	_on_change_made()
 
 # Slot Signals
 ## Called AFTER BNode is created
@@ -105,3 +149,26 @@ func _handle_bnode_deletion(to:String):
 		if c["to"] == to || c["from"] == to:
 			disconnect_node(c["from"], c["from_port"], c["to"], c["to_port"])
 
+# Templates
+func save_template(name:String, group:String):
+	if selected_node == null: return
+	if name == "": name = "Unnamed Template %s" % user_templates.size()
+	var same_name := false
+	for v in user_templates:
+		if v["name"] == name:
+			same_name = true
+			break
+	if same_name: name = "%s 2" % name
+	user_templates.append({
+		"name": name,
+		"group": group,
+		"template": selected_node.save()
+	})
+	var f := File.new()
+	var opened := f.open("res://addons/the_branch/templates.json", File.WRITE)
+	if opened != OK:
+		print("Couldn't save template!")
+		return
+	f.store_string(to_json(user_templates))
+	f.close()
+	emit_signal("refresh_templates")

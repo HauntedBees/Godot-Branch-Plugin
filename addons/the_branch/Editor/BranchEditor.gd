@@ -5,6 +5,11 @@ signal open_file_dialog
 
 onready var graph:BGraphEdit = $MainView/GraphEdit
 onready var save_button := $MainView/Buttons/InnerContainer/SaveButton
+onready var save_template_button := $MainView/Buttons/SaveTemplateButton
+onready var save_template_popup := $MainView/TemplateDialog
+onready var save_template_name := $MainView/TemplateDialog/VBoxContainer/NameGroup/TemplateName
+onready var save_template_group := $MainView/TemplateDialog/VBoxContainer/GroupGroup/GroupName
+onready var template_button := $MainView/Buttons/InnerContainer/Template
 var active_branch:BranchController
 
 func _ready():
@@ -13,7 +18,7 @@ func _ready():
 		dtn.file_path = "res://debug.json"
 		_set_up_branch(dtn)
 	else: _set_up_branch(null)
-	# TODO: load templates
+	load_templates()
 
 func _on_CreateNewButton_pressed(): emit_signal("open_file_dialog")
 func got_file_path(path:String):
@@ -39,8 +44,11 @@ func _set_up_branch(branch:BranchController):
 			has_loaded_data = _open_file(branch.file_path)
 	active_branch = branch
 	if !has_loaded_data:
-		pass # TODO: set up default stuff
-	# TODO: set up save button
+		for c in get_children():
+			if c is BaseBNode: graph.remove_child(c)
+		var sn:BStartNode = preload("res://addons/the_branch/Nodes/BStartNode.gd").instance()
+		graph.add_child(sn)
+	save_button.text = "Save"
 func _open_file(tree_path:String) -> bool:
 	var f := File.new()
 	var file_open := f.open(tree_path, File.READ)
@@ -54,16 +62,10 @@ func _open_file(tree_path:String) -> bool:
 		if c.has("is_connection_list"):
 			for cn in c["connections"]:
 				graph.connect_dictionary(cn)
-		else: _restore_bnode_from_dictionary(c)
+		else: graph.restore_bnode_from_dictionary(c)
 	return true
-func _restore_bnode_from_dictionary(c:Dictionary) -> BaseBNode:
-	var loaded_node:BaseBNode = load("res://addons/the_branch/Nodes/%s.gd" % c["type"]).new()
-	graph.add_node(loaded_node)
-	loaded_node.restore(c)
-	return loaded_node
 
 func _on_change_made(): save_button.text = "Save (*)"
-
 func _on_save():
 	if active_branch == null || active_branch.file_path == "": return
 	var res := graph.get_save_data()
@@ -73,3 +75,51 @@ func _on_save():
 	f.close()
 	save_button.text = "Save"
 
+func _on_bnode_selected():
+	save_template_button.disabled = false
+	save_template_popup.visible = false
+func _on_bnode_unselected():
+	save_template_button.disabled = true
+	save_template_popup.visible = false
+func _on_SaveTemplateButton_pressed():
+	save_template_name.text = ""
+	save_template_group.text = ""
+	save_template_popup.popup()
+func _on_TemplateDialog_confirmed(): graph.save_template(save_template_name.text, save_template_group.text)
+func _on_refresh_templates():
+	var popup:PopupMenu = template_button.get_popup()
+	popup.clear()
+	var submenus := {}
+	for ut in graph.user_templates:
+		if ut["group"] == "":
+			popup.add_item(ut["name"])
+		else:
+			if submenus.has(ut["group"]):
+				submenus[ut["group"]].add_item(ut["name"])
+			else:
+				var submenu := PopupMenu.new()
+				submenu.set_name(ut["group"])
+				submenu.add_item(ut["name"])
+				submenus[ut["group"]] = submenu
+	for k in submenus.keys():
+		popup.add_submenu_item(k, k)
+		popup.add_child(submenus[k])
+		submenus[k].connect("index_pressed", self, "_on_add_new_node_from_template_group", [submenus[k]])
+func _on_add_new_node_from_template_group(idx:int, submenu:PopupMenu):
+	_on_add_new_node_from_template(submenu.get_item_text(idx))
+func _on_add_new_node_from_template(type:String):
+	var template_dict:Dictionary = {}
+	for d in graph.user_templates:
+		if d["name"] == type:
+			template_dict = d["template"]
+			break
+	if !template_dict.has("name"): return
+	graph.restore_bnode_from_dictionary(template_dict, true)
+func load_templates():
+	var f := File.new()
+	var opened := f.open("res://addons/the_branch/templates.json", File.READ)
+	if opened != OK: return
+	var tmps := f.get_as_text()
+	f.close()
+	graph.user_templates = parse_json(tmps)
+	_on_refresh_templates() 

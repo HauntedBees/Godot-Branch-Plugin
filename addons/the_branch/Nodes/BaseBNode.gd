@@ -49,9 +49,9 @@ func save() -> Dictionary:
 	return addtl_save(save_dict)
 func addtl_save(dict:Dictionary) -> Dictionary: return dict
 
-func restore(dict:Dictionary):
+func restore(dict:Dictionary, set_position:bool = true):
 	name = dict["name"]
-	offset = Vector2(dict["pos_x"], dict["pos_y"])
+	if set_position: offset = Vector2(dict["pos_x"], dict["pos_y"])
 	rect_size = Vector2(dict["rect_x"], dict["rect_y"])
 	addtl_restore(dict)
 func addtl_restore(dict:Dictionary): return

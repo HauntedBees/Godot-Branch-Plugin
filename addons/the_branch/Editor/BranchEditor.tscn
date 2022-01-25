@@ -176,7 +176,7 @@ margin_bottom = 30.0
 text = "Save"
 icon = ExtResource( 4 )
 
-[node name="Button" type="Button" parent="MainView/Buttons"]
+[node name="SaveTemplateButton" type="Button" parent="MainView/Buttons"]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -220.0
@@ -187,15 +187,91 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="TemplateDialog" type="ConfirmationDialog" parent="MainView"]
+margin_left = 724.0
+margin_top = 63.0
+margin_right = 1004.0
+margin_bottom = 228.0
+window_title = "Save Node as Template"
+resizable = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainView/TemplateDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -36.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="MainView/TemplateDialog/VBoxContainer"]
+margin_right = 264.0
+margin_bottom = 65.0
+text = "Saving a node as a template allows you to create identical nodes with the same configuration from the \"Template\" button."
+autowrap = true
+
+[node name="NameGroup" type="HBoxContainer" parent="MainView/TemplateDialog/VBoxContainer"]
+margin_top = 69.0
+margin_right = 264.0
+margin_bottom = 93.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="MainView/TemplateDialog/VBoxContainer/NameGroup"]
+margin_top = 5.0
+margin_right = 106.0
+margin_bottom = 19.0
+text = "Template Name:"
+align = 2
+valign = 1
+
+[node name="TemplateName" type="LineEdit" parent="MainView/TemplateDialog/VBoxContainer/NameGroup"]
+margin_left = 110.0
+margin_right = 264.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+placeholder_text = "Name"
+
+[node name="GroupGroup" type="HBoxContainer" parent="MainView/TemplateDialog/VBoxContainer"]
+margin_top = 97.0
+margin_right = 264.0
+margin_bottom = 121.0
+
+[node name="Label" type="Label" parent="MainView/TemplateDialog/VBoxContainer/GroupGroup"]
+margin_top = 5.0
+margin_right = 111.0
+margin_bottom = 19.0
+text = "Group (optional): "
+align = 2
+
+[node name="GroupName" type="LineEdit" parent="MainView/TemplateDialog/VBoxContainer/GroupGroup"]
+margin_left = 115.0
+margin_right = 264.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+placeholder_text = "Group"
+
 [connection signal="pressed" from="AddNewMessage/CreateNewButton" to="." method="_on_CreateNewButton_pressed"]
+[connection signal="bnode_selected" from="MainView/GraphEdit" to="." method="_on_bnode_selected"]
+[connection signal="bnode_unselected" from="MainView/GraphEdit" to="." method="_on_bnode_unselected"]
 [connection signal="change_made" from="MainView/GraphEdit" to="." method="_on_change_made"]
 [connection signal="connection_request" from="MainView/GraphEdit" to="MainView/GraphEdit" method="_on_connection_request"]
+[connection signal="copy_nodes_request" from="MainView/GraphEdit" to="MainView/GraphEdit" method="_on_copy_nodes_request"]
+[connection signal="delete_nodes_request" from="MainView/GraphEdit" to="MainView/GraphEdit" method="_on_delete_nodes_request"]
 [connection signal="disconnection_request" from="MainView/GraphEdit" to="MainView/GraphEdit" method="_on_disconnection_request"]
 [connection signal="node_selected" from="MainView/GraphEdit" to="MainView/GraphEdit" method="_on_node_selected"]
 [connection signal="node_unselected" from="MainView/GraphEdit" to="MainView/GraphEdit" method="_on_node_unselected"]
+[connection signal="paste_nodes_request" from="MainView/GraphEdit" to="MainView/GraphEdit" method="_on_paste_nodes_request"]
+[connection signal="refresh_templates" from="MainView/GraphEdit" to="." method="_on_refresh_templates"]
 [connection signal="action" from="MainView/Buttons/InnerContainer/Code" to="MainView/GraphEdit" method="add_new_node"]
 [connection signal="action" from="MainView/Buttons/InnerContainer/Branch" to="MainView/GraphEdit" method="add_new_node"]
 [connection signal="action" from="MainView/Buttons/InnerContainer/Dialog" to="MainView/GraphEdit" method="add_new_node"]
 [connection signal="action" from="MainView/Buttons/InnerContainer/Flow" to="MainView/GraphEdit" method="add_new_node"]
 [connection signal="pressed" from="MainView/Buttons/InnerContainer/Comment" to="MainView/GraphEdit" method="add_new_node" binds= [ "Comment" ]]
 [connection signal="pressed" from="MainView/Buttons/InnerContainer/SaveButton" to="." method="_on_save"]
+[connection signal="pressed" from="MainView/Buttons/SaveTemplateButton" to="." method="_on_SaveTemplateButton_pressed"]
+[connection signal="confirmed" from="MainView/TemplateDialog" to="." method="_on_TemplateDialog_confirmed"]
