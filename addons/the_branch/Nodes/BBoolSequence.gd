@@ -1,8 +1,8 @@
 tool
-class_name BFunctionSequence
+class_name BBoolSequence
 extends BaseBNode
 
-func display_name() -> String: return "Function Sequence"
+func display_name() -> String: return "Boolean Sequence"
 func hint() -> String: return "Executes all of the functions on the parent node in order, then advances to the next node."
 
 var functions := []
@@ -27,7 +27,7 @@ func _ready():
 	add_child(func_button)
 	add_child(separator())
 	num_elements = get_child_count() - 1
-	set_slot(0, true, 0, SLOT_COLOR, true, 0, SLOT_COLOR)
+	set_slot(0, true, 0, SLOT_COLOR, false, 0, SLOT_COLOR)
 
 func _on_add_function(d:Dictionary = {}):
 	emit_signal("change_made")
@@ -37,8 +37,11 @@ func _on_add_function(d:Dictionary = {}):
 	functions.append(func_node)
 	func_node.connect("change_made", self, "_on_change")
 	func_node.connect("delete", self, "_on_delete_function", [func_node])
+	set_slot(num_elements + functions.size(), false, 0, SLOT_COLOR, true, 0, SLOT_COLOR)
 
 func _on_delete_function(f:BInnerFunction):
+	var idx := functions.find(f)
 	emit_signal("change_made")
+	emit_signal("delete_slot", name, idx)
 	functions.erase(f)
 	f.queue_free()

@@ -4,6 +4,7 @@ extends GraphEdit
 signal change_made
 
 const NODE_TYPES := {
+	"Function Call": preload("res://addons/the_branch/Nodes/BFunctionCall.gd"),
 	"Function Sequence": preload("res://addons/the_branch/Nodes/BFunctionSequence.gd"),
 	"Dialog": preload("res://addons/the_branch/Nodes/BDialog.gd"),
 	"Dialog Choice": preload("res://addons/the_branch/Nodes/BDialogChoice.gd")
