@@ -3,7 +3,7 @@ class_name BRandom
 extends BaseBNode
 
 func display_name() -> String: return "Random Condition"
-func hint() -> String: return "Picks a random number between 0 and 1 and then advances based on the result.."
+func hint() -> String: return "Picks a random number between 0 and 1 and then advances based on the result."
 
 var weighted_button:CheckButton
 var weighted := false

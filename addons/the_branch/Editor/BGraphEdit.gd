@@ -6,6 +6,7 @@ signal change_made
 const NODE_TYPES := {
 	"Function Call": preload("res://addons/the_branch/Nodes/BFunctionCall.gd"),
 	"Function Sequence": preload("res://addons/the_branch/Nodes/BFunctionSequence.gd"),
+	"Variable Assignment": preload("res://addons/the_branch/Nodes/BVarAssignment.gd"),
 	"Boolean Function": preload("res://addons/the_branch/Nodes/BBoolFunction.gd"),
 	"Boolean Sequence": preload("res://addons/the_branch/Nodes/BBoolSequence.gd"),
 	"Random Condition": preload("res://addons/the_branch/Nodes/BRandom.gd"),

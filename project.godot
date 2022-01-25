@@ -84,6 +84,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/the_branch/Nodes/BRandom.gd"
 }, {
+"base": "HBoxContainer",
+"class": "BTypedInput",
+"language": "GDScript",
+"path": "res://addons/the_branch/Fragments/BTypedInput.gd"
+}, {
+"base": "BaseBNode",
+"class": "BVarAssignment",
+"language": "GDScript",
+"path": "res://addons/the_branch/Nodes/BVarAssignment.gd"
+}, {
 "base": "GraphNode",
 "class": "BaseBNode",
 "language": "GDScript",
@@ -115,6 +125,8 @@ _global_script_class_icons={
 "BParameterEdit": "",
 "BPercentageSelect": "",
 "BRandom": "",
+"BTypedInput": "",
+"BVarAssignment": "",
 "BaseBNode": "",
 "BranchController": "",
 "BranchEditor": ""
