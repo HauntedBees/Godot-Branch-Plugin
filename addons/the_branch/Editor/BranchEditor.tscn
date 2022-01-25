@@ -67,12 +67,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="GraphEdit" type="GraphEdit" parent="MainView"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+right_disconnects = true
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
