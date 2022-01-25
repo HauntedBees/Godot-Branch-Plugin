@@ -34,7 +34,7 @@ func addtl_save(d:Dictionary) -> Dictionary:
 func addtl_restore(d:Dictionary):
 	set_value(d["text"])
 	set_speaker(d["speaker"])
-	param_info.restore_params_from_dict_array(d["params"], param_container, self)
+	param_info.restore_params_from_dict_array(d["params"])
 
 func _ready():
 	speaker_node = LineEdit.new()
@@ -56,13 +56,8 @@ func _ready():
 	add_child(body_node)
 	add_child(separator())
 	
-	var param_container := VBoxContainer.new()
-
 	param_info = BParamHandler.new()
-	add_child(param_info.get_params_button(param_container, self, "Add Additional Parameter", "Add some optional metadata to this dialog node."))
+	param_info.configure(self, self, "Add Additional Parameter", "Add some optional metadata to this dialog node.")
 	add_child(separator())
-	
-	param_container.size_flags_horizontal = SIZE_EXPAND_FILL
-	add_child(param_container)
 	
 	set_slot(0, true, 0, SLOT_COLOR, true, 0, SLOT_COLOR)

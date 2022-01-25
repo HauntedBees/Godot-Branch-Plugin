@@ -32,11 +32,11 @@ func add_new_node(type:String):
 	if !NODE_TYPES.has(type): return
 	add_node(NODE_TYPES[type].new(), true)
 func add_node(b:BaseBNode, is_new:bool = false):
-	#b.connect("delete_slot", self, "_handle_slot_deletion")
-	#b.connect("insert_slot", self, "_handle_slot_insertion")
+	b.connect("delete_slot", self, "_handle_slot_deletion")
+	b.connect("insert_slot", self, "_handle_slot_insertion")
 	b.connect("delete_node", self, "_handle_bnode_deletion")
 	b.connect("change_made", self, "_on_change_made")
-	#b.connect("view_source", self, "_on_view_source")
+	b.connect("view_source", self, "_on_view_source")
 	if is_new:
 		b.offset = scroll_offset + (rect_size - b.rect_size) / 2.0
 		emit_signal("change_made")

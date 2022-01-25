@@ -6,6 +6,9 @@ var separator_theme:Theme = preload("res://addons/the_branch/Editor/separator.tr
 
 signal change_made
 signal delete_node(name)
+signal insert_slot
+signal delete_slot
+signal view_source
 
 const SLOT_COLOR := Color("#BD8F8F")
 
