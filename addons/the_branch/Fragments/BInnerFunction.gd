@@ -15,7 +15,6 @@ var param_info:BParamHandler
 
 func _ready():
 	size_flags_horizontal = SIZE_EXPAND_FILL
-	size_flags_vertical = SIZE_EXPAND_FILL
 	
 	var vb := VBoxContainer.new()
 	vb.size_flags_horizontal = SIZE_EXPAND_FILL

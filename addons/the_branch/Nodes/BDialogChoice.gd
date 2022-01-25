@@ -36,7 +36,6 @@ func _ready():
 	add_child(separator())
 	set_slot(0, true, 0, SLOT_COLOR, false, 0, SLOT_COLOR)
 	num_elements = get_child_count() - 1
-
 func _add_choice(d:Dictionary = {}):
 	var choice := BChoice.new()
 	add_child(choice)
@@ -45,7 +44,6 @@ func _add_choice(d:Dictionary = {}):
 	choice.connect("change_made", self, "_on_change")
 	choice.connect("delete", self, "_on_choice_delete", [choice])
 	set_slot(num_elements + choices.size(), false, 0, SLOT_COLOR, true, 0, SLOT_COLOR)
-
 func _on_choice_delete(c:BChoice):
 	var idx := choices.find(c)
 	emit_signal("change_made")

@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/the_branch/Nodes/BDialogChoice.gd"
 }, {
+"base": "BaseBNode",
+"class": "BFunctionSequence",
+"language": "GDScript",
+"path": "res://addons/the_branch/Nodes/BFunctionSequence.gd"
+}, {
 "base": "GraphEdit",
 "class": "BGraphEdit",
 "language": "GDScript",
@@ -74,6 +79,7 @@ _global_script_class_icons={
 "BDeleteInput": "",
 "BDialog": "",
 "BDialogChoice": "",
+"BFunctionSequence": "",
 "BGraphEdit": "",
 "BInnerFunction": "",
 "BParamHandler": "",

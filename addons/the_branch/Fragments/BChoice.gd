@@ -55,7 +55,6 @@ func _ready():
 	func_node = BInnerFunction.new()
 	func_node.allow_delete = false
 	func_node.visible = display_type == FUNCTION_CALL
-	func_node.size_flags_horizontal = SIZE_EXPAND_FILL
 	vb.add_child(func_node)
 	
 	prop_node = VBoxContainer.new()
