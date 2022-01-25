@@ -12,7 +12,10 @@ const NODE_TYPES := {
 	"Random Condition": preload("res://addons/the_branch/Nodes/BRandom.gd"),
 	"Variable Comparison": preload("res://addons/the_branch/Nodes/BVarComparison.gd"),
 	"Dialog": preload("res://addons/the_branch/Nodes/BDialog.gd"),
-	"Dialog Choice": preload("res://addons/the_branch/Nodes/BDialogChoice.gd")
+	"Dialog Choice": preload("res://addons/the_branch/Nodes/BDialogChoice.gd"),
+	"Restart": preload("res://addons/the_branch/Nodes/BRepeatNode.gd"),
+	"End": preload("res://addons/the_branch/Nodes/BEndNode.gd"),
+	"Comment": preload("res://addons/the_branch/Nodes/BCommentNode.gd")
 }
 
 var selected_node:BaseBNode
@@ -101,3 +104,4 @@ func _handle_bnode_deletion(to:String):
 	for c in connections:
 		if c["to"] == to || c["from"] == to:
 			disconnect_node(c["from"], c["from_port"], c["to"], c["to_port"])
+

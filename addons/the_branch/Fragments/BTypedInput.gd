@@ -25,7 +25,7 @@ func _ready():
 	num_edit.size_flags_horizontal = SIZE_EXPAND_FILL
 	num_edit.allow_lesser = true
 	num_edit.allow_greater = true
-	num_edit.connect("changed", self, "_on_change")
+	num_edit.connect("value_changed", self, "_on_change")
 	add_child(num_edit)
 	
 	bool_edit = CheckBox.new()

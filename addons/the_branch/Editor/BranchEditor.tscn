@@ -197,4 +197,5 @@ __meta__ = {
 [connection signal="action" from="MainView/Buttons/InnerContainer/Branch" to="MainView/GraphEdit" method="add_new_node"]
 [connection signal="action" from="MainView/Buttons/InnerContainer/Dialog" to="MainView/GraphEdit" method="add_new_node"]
 [connection signal="action" from="MainView/Buttons/InnerContainer/Flow" to="MainView/GraphEdit" method="add_new_node"]
+[connection signal="pressed" from="MainView/Buttons/InnerContainer/Comment" to="MainView/GraphEdit" method="add_new_node" binds= [ "Comment" ]]
 [connection signal="pressed" from="MainView/Buttons/InnerContainer/SaveButton" to="." method="_on_save"]
