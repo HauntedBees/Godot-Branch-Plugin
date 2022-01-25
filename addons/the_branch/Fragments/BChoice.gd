@@ -6,25 +6,17 @@ signal change_made
 signal delete
 
 enum { ALWAYS_SHOW, FUNCTION_CALL, VARIABLE_COMPARISON }
-enum { EQUALS, GTE, GT, LTE, LT, NOT, CONTAINS }
-enum { STRING, INT, FLOAT, BOOL, VAR }
 
 var text_node:BDeleteInput
 var options_node:OptionButton
 var func_node:BInnerFunction
-
 var prop_node:VBoxContainer
-var var_compare_name_node:LineEdit
-var var_compare_comparison_node:OptionButton
-var var_compare_val_node:LineEdit
-var var_compare_type_node:OptionButton
+var var_name_node:LineEdit
+var var_node:BVarCompare
 
 var text := "" setget set_text
 var display_type := ALWAYS_SHOW setget set_display_type
-var var_compare_name := "" setget set_var_compare_name
-var var_compare_comparison := EQUALS setget set_var_compare_comparison
-var var_compare_val := "" setget set_var_compare_val
-var var_compare_type := STRING setget set_var_compare_type
+var var_name := "" setget set_var_name
 
 func _ready():
 	size_flags_horizontal = SIZE_EXPAND_FILL
@@ -62,70 +54,35 @@ func _ready():
 	prop_node.size_flags_horizontal = SIZE_EXPAND_FILL
 	vb.add_child(prop_node)
 	
-	var_compare_name_node = LineEdit.new()
-	var_compare_name_node.text = var_compare_name
-	var_compare_name_node.placeholder_text = "Property Name"
-	var_compare_name_node.size_flags_horizontal = SIZE_EXPAND_FILL
-	var_compare_name_node.connect("text_changed", self, "_on_var_compare_name_change")
-	var_compare_name_node.hint_tooltip = "The name of a property on the BranchController's parent to compare against."
-	prop_node.add_child(var_compare_name_node)
+	var_name_node = LineEdit.new()
+	var_name_node.text = var_name
+	var_name_node.placeholder_text = "Property Name"
+	var_name_node.size_flags_horizontal = SIZE_EXPAND_FILL
+	var_name_node.connect("text_changed", self, "_on_var_name_change")
+	var_name_node.hint_tooltip = "The name of a property on the BranchController's parent to compare against."
+	prop_node.add_child(var_name_node)
 	
-	var hb := HBoxContainer.new()
-	prop_node.add_child(hb)
-	var_compare_comparison_node = OptionButton.new()
-	var_compare_comparison_node.add_item("==")
-	var_compare_comparison_node.add_item(">=")
-	var_compare_comparison_node.add_item(">")
-	var_compare_comparison_node.add_item("<=")
-	var_compare_comparison_node.add_item("<")
-	var_compare_comparison_node.add_item("!=")
-	var_compare_comparison_node.add_item("contains")
-	var_compare_comparison_node.select(var_compare_comparison)
-	var_compare_comparison_node.connect("item_selected", self, "_on_var_compare_comparison_change")
-	var_compare_comparison_node.hint_tooltip = "The comparison operator. \"contains\" only works if the above specified property is an array."
-	hb.add_child(var_compare_comparison_node)
-	
-	var_compare_val_node = LineEdit.new()
-	var_compare_val_node.text = var_compare_val
-	var_compare_val_node.placeholder_text = "Value"
-	var_compare_val_node.size_flags_horizontal = SIZE_EXPAND_FILL
-	var_compare_val_node.connect("text_changed", self, "_on_var_compare_val_change")
-	var_compare_val_node.hint_tooltip = "The value to compare the above property against, based on the specified comparison operator."
-	hb.add_child(var_compare_val_node)
-	
-	var_compare_type_node = OptionButton.new()
-	var_compare_type_node.add_item("String")
-	var_compare_type_node.add_item("int")
-	var_compare_type_node.add_item("float")
-	var_compare_type_node.add_item("bool")
-	var_compare_type_node.add_item("var")
-	var_compare_type_node.select(var_compare_type)
-	var_compare_type_node.connect("item_selected", self, "_on_var_compare_type_change")
-	var_compare_type_node.hint_tooltip = "The type of the specified comparison value. If \"var\" is selected, then this value is treated as the name of a property on the BranchController's parent."
-	hb.add_child(var_compare_type_node)
+	var_node = BVarCompare.new()
+	var_node.connect("change_made", self, "_on_change")
+	prop_node.add_child(var_node)
 
 func get_as_dictionary() -> Dictionary:
+	var d := var_node.get_as_dictionary()
+	d["property"] = var_name
 	return {
 		"text": text,
 		"type": display_type,
 		"func": func_node.get_as_dictionary(),
-		"comparison": {
-			"property": var_compare_name,
-			"comparison": var_compare_comparison,
-			"value": var_compare_val,
-			"type": var_compare_type
-		}
+		"comparison": d
 	}
 func restore_from_dictionary(d:Dictionary):
 	set_text(d["text"])
 	set_display_type(d["type"])
+	set_var_name(d["comparison"]["property"])
 	func_node.restore_from_dictionary(d["func"])
 	func_node.visible = display_type == FUNCTION_CALL
 	prop_node.visible = display_type == VARIABLE_COMPARISON
-	set_var_compare_name(d["comparison"]["property"])
-	set_var_compare_comparison(d["comparison"]["comparison"])
-	set_var_compare_val(d["comparison"]["value"])
-	set_var_compare_type(d["comparison"]["type"])
+	var_node.restore_from_dictionary(d["comparison"])
 
 func set_text(s:String):
 	text = s
@@ -136,39 +93,20 @@ func set_display_type(i:int):
 		options_node.select(i)
 		func_node.visible = display_type == FUNCTION_CALL
 		prop_node.visible = display_type == VARIABLE_COMPARISON
-func set_var_compare_name(s:String):
-	var_compare_name = s
-	if var_compare_name_node != null: var_compare_name_node.text = s
-func set_var_compare_comparison(i:int):
-	var_compare_comparison = i
-	if var_compare_comparison_node != null: var_compare_comparison_node.select(i)
-func set_var_compare_val(s:String):
-	var_compare_val = s
-	if var_compare_val_node != null: var_compare_val_node.text = s
-func set_var_compare_type(i:int):
-	var_compare_type = i
-	if var_compare_type_node != null: var_compare_type_node.select(i)
-
+func set_var_name(s:String):
+	var_name = s
+	if var_name_node != null: var_name_node.text = s
+	
 func _on_text_change(t:String):
 	emit_signal("change_made")
 	text = t
-func _on_var_compare_name_change(s:String):
-	var_compare_name = s
-	emit_signal("change_made")
-func _on_var_compare_comparison_change(i:int):
-	var_compare_comparison = i
-	emit_signal("change_made")
-func _on_var_compare_val_change(s:String):
-	var_compare_val = s
-	emit_signal("change_made")
-func _on_var_compare_type_change(i:int):
-	var_compare_type = i
-	emit_signal("change_made")
-
 func _on_display_type_changed(i:int):
 	display_type = i
 	func_node.visible = display_type == FUNCTION_CALL
 	prop_node.visible = display_type == VARIABLE_COMPARISON
+	emit_signal("change_made")
+func _on_var_name_change(s:String):
+	var_name = s
 	emit_signal("change_made")
 func _on_change(i): emit_signal("change_made")
 func _on_delete(): emit_signal("delete")
