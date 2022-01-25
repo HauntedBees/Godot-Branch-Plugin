@@ -45,10 +45,10 @@ func _on_add_comparison(d:Dictionary = {}):
 	emit_signal("change_made")
 	var comp_node := BVarCompare.new()
 	add_child(comp_node)
-	if d.has("name"): comp_node.restore_from_dictionary(d)
+	if d.has("value"): comp_node.restore_from_dictionary(d)
 	comparisons.append(comp_node)
 	comp_node.connect("change_made", self, "_on_change")
-	comp_node.connect("delete", self, "_on_delete_function", [comp_node]) # TODO: this
+	#comp_node.connect("delete", self, "_on_delete_function", [comp_node]) # TODO: this
 	move_child(comp_node, comparisons.size())
 	set_slot(comparisons.size() + 1, false, 0, SLOT_COLOR, true, 0, SLOT_COLOR)
 	emit_signal("insert_slot", name, comparisons.size() - 1)

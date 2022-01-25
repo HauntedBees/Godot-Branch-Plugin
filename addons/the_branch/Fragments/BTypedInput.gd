@@ -51,6 +51,7 @@ func _on_type_selected(t:int):
 func _on_change(_v): emit_signal("change_made")
 
 func set_type(t:int):
+	print("TYPESETTING %s" % t)
 	type = t
 	text_edit.visible = false
 	num_edit.visible = false
