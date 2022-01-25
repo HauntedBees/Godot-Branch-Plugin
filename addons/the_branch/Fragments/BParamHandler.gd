@@ -40,6 +40,6 @@ func _add_parameter(d:Dictionary):
 		param.set_value(d["value"])
 
 func _on_param_delete(p:BParameter):
-	parent_node._on_change(p)
+	parent_node._on_change_arg(p)
 	parameters.erase(p)
 	p.queue_free()

@@ -26,6 +26,7 @@ func _ready():
 	connect("dragged", self, "_on_drag_request")
 
 func _on_change(): emit_signal("change_made")
+func _on_change_arg(_v): emit_signal("change_made")
 func _on_close_request():
 	emit_signal("change_made")
 	emit_signal("delete_node", name)

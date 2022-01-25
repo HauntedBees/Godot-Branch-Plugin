@@ -123,6 +123,10 @@ func restore_from_dictionary(d:Dictionary):
 	func_node.restore_from_dictionary(d["func"])
 	func_node.visible = display_type == FUNCTION_CALL
 	prop_node.visible = display_type == VARIABLE_COMPARISON
+	set_var_compare_name(d["comparison"]["property"])
+	set_var_compare_comparison(d["comparison"]["comparison"])
+	set_var_compare_val(d["comparison"]["value"])
+	set_var_compare_type(d["comparison"]["type"])
 
 func set_text(s:String):
 	text = s
