@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://example/assets/spritesheet.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://example/Example_NPC.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 29, 28.5 )
+
+[node name="Example_NPC" type="AnimatedSprite"]
+frames = ExtResource( 1 )
+animation = "mom"
+script = ExtResource( 2 )
+
+[node name="NPC_Area" type="Area2D" parent="."]
+
+[node name="NPC_Collider" type="CollisionShape2D" parent="NPC_Area"]
+position = Vector2( 0, 7.5 )
+shape = SubResource( 1 )
+
+[node name="Tween" type="Tween" parent="."]

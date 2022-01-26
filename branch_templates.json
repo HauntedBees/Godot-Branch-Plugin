@@ -1,43 +1,43 @@
 [{
-        "group": "Movement",
+        "group": "movement",
         "name": "walk_dir",
         "template": {
             "func": {
                 "name": "walk_dir",
                 "params": [{
                         "name": "x",
-                        "type": 2,
+                        "type": 1,
                         "value": 0
                     }, {
                         "name": "y",
-                        "type": 2,
+                        "type": 1,
                         "value": 0
                     }
                 ]
             },
-            "name": "GraphNode2",
-            "pos_x": 500,
-            "pos_y": 260,
-            "rect_x": 231,
+            "node_name": "GraphNode3",
+            "pos_x": 1440,
+            "pos_y": 480,
+            "rect_x": 246,
             "rect_y": 153,
             "type": "BFunctionCall"
         }
     }, {
         "group": "Misc",
-        "name": "Sleep",
+        "name": "sleep",
         "template": {
             "func": {
                 "name": "sleep",
                 "params": [{
                         "name": "ms",
                         "type": 2,
-                        "value": 0
+                        "value": 500
                     }
                 ]
             },
-            "name": "GraphNode3",
-            "pos_x": 700,
-            "pos_y": 280,
+            "node_name": "GraphNode5",
+            "pos_x": 1020,
+            "pos_y": 260,
             "rect_x": 244,
             "rect_y": 123,
             "type": "BFunctionCall"

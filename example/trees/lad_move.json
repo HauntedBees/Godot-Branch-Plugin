@@ -1,0 +1,148 @@
+[{
+        "node_name": "StartNode",
+        "pos_x": 920,
+        "pos_y": 540,
+        "rect_x": 96,
+        "rect_y": 65,
+        "type": "BStartNode"
+    }, {
+        "node_name": "GraphNode2",
+        "pos_x": 1400,
+        "pos_y": 640,
+        "rect_x": 121,
+        "rect_y": 65,
+        "type": "BRepeatNode"
+    }, {
+        "func": {
+            "name": "walk_dir",
+            "params": [{
+                    "name": "x",
+                    "type": 1,
+                    "value": 0
+                }, {
+                    "name": "y",
+                    "type": 1,
+                    "value": -50
+                }
+            ]
+        },
+        "node_name": "GraphNode3",
+        "pos_x": 1440,
+        "pos_y": 480,
+        "rect_x": 246,
+        "rect_y": 153,
+        "type": "BFunctionCall"
+    }, {
+        "func": {
+            "name": "walk_dir",
+            "params": [{
+                    "name": "x",
+                    "type": 1,
+                    "value": 0
+                }, {
+                    "name": "y",
+                    "type": 1,
+                    "value": 50
+                }
+            ]
+        },
+        "node_name": "GraphNode4",
+        "pos_x": 2000,
+        "pos_y": 480,
+        "rect_x": 246,
+        "rect_y": 153,
+        "type": "BFunctionCall"
+    }, {
+        "func": {
+            "name": "sleep",
+            "params": [{
+                    "name": "ms",
+                    "type": 2,
+                    "value": 1500
+                }
+            ]
+        },
+        "node_name": "GraphNode5",
+        "pos_x": 1740,
+        "pos_y": 480,
+        "rect_x": 244,
+        "rect_y": 123,
+        "type": "BFunctionCall"
+    }, {
+        "func": {
+            "name": "sleep",
+            "params": [{
+                    "name": "ms",
+                    "type": 2,
+                    "value": 1500
+                }
+            ]
+        },
+        "node_name": "GraphNode6",
+        "pos_x": 2260,
+        "pos_y": 500,
+        "rect_x": 244,
+        "rect_y": 123,
+        "type": "BFunctionCall"
+    }, {
+        "node_name": "GraphNode7",
+        "pos_x": 2540,
+        "pos_y": 520,
+        "rect_x": 121,
+        "rect_y": 65,
+        "type": "BRepeatNode"
+    }, {
+        "comparisons": [{
+                "comparison": 1,
+                "type": 1,
+                "value": 1
+            }
+        ],
+        "name": "parent.son_found_state",
+        "node_name": "GraphNode",
+        "pos_x": 1080,
+        "pos_y": 500,
+        "rect_x": 279,
+        "rect_y": 179,
+        "type": "BVarComparison"
+    }, {
+        "connections": [{
+                "from": "StartNode",
+                "from_port": 0,
+                "to": "GraphNode",
+                "to_port": 0
+            }, {
+                "from": "GraphNode",
+                "from_port": 1,
+                "to": "GraphNode2",
+                "to_port": 0
+            }, {
+                "from": "GraphNode",
+                "from_port": 0,
+                "to": "GraphNode3",
+                "to_port": 0
+            }, {
+                "from": "GraphNode3",
+                "from_port": 0,
+                "to": "GraphNode5",
+                "to_port": 0
+            }, {
+                "from": "GraphNode5",
+                "from_port": 0,
+                "to": "GraphNode4",
+                "to_port": 0
+            }, {
+                "from": "GraphNode4",
+                "from_port": 0,
+                "to": "GraphNode6",
+                "to_port": 0
+            }, {
+                "from": "GraphNode6",
+                "from_port": 0,
+                "to": "GraphNode7",
+                "to_port": 0
+            }
+        ],
+        "is_connection_list": true
+    }
+]

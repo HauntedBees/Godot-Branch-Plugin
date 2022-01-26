@@ -1,0 +1,196 @@
+[{
+        "node_name": "StartNode",
+        "pos_x": 960,
+        "pos_y": 400,
+        "rect_x": 96,
+        "rect_y": 65,
+        "type": "BStartNode"
+    }, {
+        "choices": [{
+                "comparison": {
+                    "comparison": 0,
+                    "property": "",
+                    "type": 0,
+                    "value": ""
+                },
+                "func": {
+                    "name": "",
+                    "params": []
+                },
+                "text": "I can try...",
+                "type": 0
+            }, {
+                "comparison": {
+                    "comparison": 1,
+                    "property": "parent.son_found_state",
+                    "type": 1,
+                    "value": 2
+                },
+                "func": {
+                    "name": "",
+                    "params": []
+                },
+                "text": "Got any tips?",
+                "type": 2
+            }, {
+                "comparison": {
+                    "comparison": 0,
+                    "property": "parent.has_dog",
+                    "type": 3,
+                    "value": true
+                },
+                "func": {
+                    "name": "",
+                    "params": []
+                },
+                "text": "Here you go.",
+                "type": 2
+            }
+        ],
+        "node_name": "GraphNode2",
+        "params": [],
+        "pos_x": 1500,
+        "pos_y": 240,
+        "rect_x": 276,
+        "rect_y": 530,
+        "speaker": "Dog Guardian",
+        "text": "Can you do that?",
+        "type": "BDialogChoice"
+    }, {
+        "node_name": "GraphNode5",
+        "params": [],
+        "pos_x": 1820,
+        "pos_y": 680,
+        "rect_x": 329,
+        "rect_y": 168,
+        "speaker": "Dog Guardian",
+        "text": "You truly are the chosen one... Thank you for this gift of dog beholding.",
+        "type": "BDialog"
+    }, {
+        "node_name": "GraphNode4",
+        "params": [],
+        "pos_x": 1820,
+        "pos_y": 460,
+        "rect_x": 336,
+        "rect_y": 181,
+        "speaker": "Dog Guardian",
+        "text": "Don't just flail your stick around like it's some sort of... flail. Gently wag it! Match the speed of the dog's tail.",
+        "type": "BDialog"
+    }, {
+        "node_name": "GraphNode6",
+        "params": [],
+        "pos_x": 2180,
+        "pos_y": 460,
+        "rect_x": 329,
+        "rect_y": 159,
+        "speaker": "Dog Guardian",
+        "text": "If you can pull that off, maybe the dog will follow you.",
+        "type": "BDialog"
+    }, {
+        "node_name": "GraphNode7",
+        "params": [],
+        "pos_x": 2180,
+        "pos_y": 680,
+        "rect_x": 384,
+        "rect_y": 199,
+        "speaker": "Dog Guardian",
+        "text": "Also congrats on beating this example project I hope it convinces you that this Branch plugin is the coolest thing since sliced Godot.",
+        "type": "BDialog"
+    }, {
+        "name": "parent.son_found_state",
+        "node_name": "GraphNode8",
+        "pos_x": 2540,
+        "pos_y": 440,
+        "rect_x": 212,
+        "rect_y": 85,
+        "type": "BVarAssignment",
+        "value": 3,
+        "var_type": 1
+    }, {
+        "node_name": "GraphNode3",
+        "params": [],
+        "pos_x": 2040,
+        "pos_y": 220,
+        "rect_x": 260,
+        "rect_y": 159,
+        "speaker": "Dog Guardian",
+        "text": "I'm sure you can...",
+        "type": "BDialog"
+    }, {
+        "node_name": "GraphNode9",
+        "pos_x": 2880,
+        "pos_y": 440,
+        "rect_x": 99,
+        "rect_y": 65,
+        "type": "BEndNode"
+    }, {
+        "node_name": "GraphNode",
+        "params": [],
+        "pos_x": 1120,
+        "pos_y": 360,
+        "rect_x": 330,
+        "rect_y": 184,
+        "speaker": "Dog Guardian",
+        "text": "If you want to prove your worth, you must show your kindness by bringing me a cute little doggy dog.",
+        "type": "BDialog"
+    }, {
+        "connections": [{
+                "from": "GraphNode",
+                "from_port": 0,
+                "to": "GraphNode2",
+                "to_port": 0
+            }, {
+                "from": "GraphNode2",
+                "from_port": 0,
+                "to": "GraphNode3",
+                "to_port": 0
+            }, {
+                "from": "GraphNode2",
+                "from_port": 1,
+                "to": "GraphNode4",
+                "to_port": 0
+            }, {
+                "from": "GraphNode2",
+                "from_port": 2,
+                "to": "GraphNode5",
+                "to_port": 0
+            }, {
+                "from": "GraphNode4",
+                "from_port": 0,
+                "to": "GraphNode6",
+                "to_port": 0
+            }, {
+                "from": "GraphNode5",
+                "from_port": 0,
+                "to": "GraphNode7",
+                "to_port": 0
+            }, {
+                "from": "GraphNode6",
+                "from_port": 0,
+                "to": "GraphNode8",
+                "to_port": 0
+            }, {
+                "from": "GraphNode8",
+                "from_port": 0,
+                "to": "GraphNode9",
+                "to_port": 0
+            }, {
+                "from": "GraphNode7",
+                "from_port": 0,
+                "to": "GraphNode9",
+                "to_port": 0
+            }, {
+                "from": "GraphNode3",
+                "from_port": 0,
+                "to": "GraphNode9",
+                "to_port": 0
+            }, {
+                "from": "StartNode",
+                "from_port": 0,
+                "to": "GraphNode",
+                "to_port": 0
+            }
+        ],
+        "is_connection_list": true
+    }
+]

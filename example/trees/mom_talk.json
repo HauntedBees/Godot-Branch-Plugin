@@ -1,0 +1,149 @@
+[{
+        "node_name": "GraphNode6",
+        "pos_x": 820,
+        "pos_y": -200,
+        "rect_x": 225,
+        "rect_y": 129,
+        "text": "Assign the variable, concluding the \"mission.\"",
+        "type": "BCommentNode"
+    }, {
+        "node_name": "GraphNode2",
+        "pos_x": 80,
+        "pos_y": -240,
+        "rect_x": 228,
+        "rect_y": 129,
+        "text": "Check the value of a variable to determine where to go next.",
+        "type": "BCommentNode"
+    }, {
+        "node_name": "StartNode",
+        "pos_x": -80,
+        "pos_y": -60,
+        "rect_x": 96,
+        "rect_y": 65,
+        "type": "BStartNode"
+    }, {
+        "comparisons": [{
+                "comparison": 1,
+                "type": 1,
+                "value": 2
+            }, {
+                "comparison": 0,
+                "type": 1,
+                "value": 1
+            }
+        ],
+        "name": "parent.son_found_state",
+        "node_name": "GraphNode",
+        "pos_x": 40,
+        "pos_y": -100,
+        "rect_x": 329,
+        "rect_y": 213,
+        "type": "BVarComparison"
+    }, {
+        "node_name": "GraphNode3",
+        "params": [],
+        "pos_x": 420,
+        "pos_y": -220,
+        "rect_x": 242,
+        "rect_y": 159,
+        "speaker": "Concerned Mum",
+        "text": "I'm glad my son is okay.",
+        "type": "BDialog"
+    }, {
+        "name": "parent.son_found_state",
+        "node_name": "GraphNode5",
+        "pos_x": 720,
+        "pos_y": -20,
+        "rect_x": 212,
+        "rect_y": 85,
+        "type": "BVarAssignment",
+        "value": 2,
+        "var_type": 1
+    }, {
+        "node_name": "GraphNode7",
+        "pos_x": 1000,
+        "pos_y": -40,
+        "rect_x": 99,
+        "rect_y": 65,
+        "type": "BEndNode"
+    }, {
+        "node_name": "GraphNode4",
+        "params": [],
+        "pos_x": 420,
+        "pos_y": -40,
+        "rect_x": 267,
+        "rect_y": 189,
+        "speaker": "Concerned Mum",
+        "text": "Oh, you've found my son? He's okay? Oh, that's excellent news! Thank you!",
+        "type": "BDialog"
+    }, {
+        "node_name": "GraphNode8",
+        "params": [],
+        "pos_x": 440,
+        "pos_y": 180,
+        "rect_x": 267,
+        "rect_y": 189,
+        "speaker": "Concerned Mum",
+        "text": "Have you seen my son? He went out to play by the river but I haven't heard from him in a while!",
+        "type": "BDialog"
+    }, {
+        "node_name": "GraphNode9",
+        "params": [],
+        "pos_x": 740,
+        "pos_y": 160,
+        "rect_x": 267,
+        "rect_y": 189,
+        "speaker": "Concerned Mum",
+        "text": "If you find him, please let him know I'm looking for him!",
+        "type": "BDialog"
+    }, {
+        "connections": [{
+                "from": "StartNode",
+                "from_port": 0,
+                "to": "GraphNode",
+                "to_port": 0
+            }, {
+                "from": "GraphNode",
+                "from_port": 0,
+                "to": "GraphNode3",
+                "to_port": 0
+            }, {
+                "from": "GraphNode",
+                "from_port": 1,
+                "to": "GraphNode4",
+                "to_port": 0
+            }, {
+                "from": "GraphNode4",
+                "from_port": 0,
+                "to": "GraphNode5",
+                "to_port": 0
+            }, {
+                "from": "GraphNode5",
+                "from_port": 0,
+                "to": "GraphNode7",
+                "to_port": 0
+            }, {
+                "from": "GraphNode3",
+                "from_port": 0,
+                "to": "GraphNode7",
+                "to_port": 0
+            }, {
+                "from": "GraphNode",
+                "from_port": 2,
+                "to": "GraphNode8",
+                "to_port": 0
+            }, {
+                "from": "GraphNode8",
+                "from_port": 0,
+                "to": "GraphNode9",
+                "to_port": 0
+            }, {
+                "from": "GraphNode9",
+                "from_port": 0,
+                "to": "GraphNode7",
+                "to_port": 0
+            }
+        ],
+        "is_connection_list": true
+    }
+]

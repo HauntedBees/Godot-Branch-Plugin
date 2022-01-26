@@ -1,0 +1,155 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://example/assets/spritesheet.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Example.gd" type="Script" id=2]
+[ext_resource path="res://example/Example_NPC.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/the_branch/BranchController.gd" type="Script" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 33.5, 32.5 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 146.75, 90 )
+
+[node name="Example" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Ground" type="ColorRect" parent="."]
+margin_left = -3.0
+margin_top = -3.0
+margin_right = 1030.0
+margin_bottom = 605.0
+color = Color( 0.321569, 0.752941, 0.0784314, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="River" type="ColorRect" parent="Ground"]
+margin_left = 1065.0
+margin_top = 233.0
+margin_right = 1299.0
+margin_bottom = 765.0
+rect_rotation = 32.7766
+color = Color( 0.0941176, 0.760784, 0.811765, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Dirt" type="ColorRect" parent="Ground"]
+margin_left = 35.0
+margin_top = 367.0
+margin_right = 331.0
+margin_bottom = 551.0
+color = Color( 0.576471, 0.4, 0.152941, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Mom" parent="." instance=ExtResource( 3 )]
+position = Vector2( 157, 135 )
+flip_h = true
+
+[node name="Talk" type="Node" parent="Mom"]
+script = ExtResource( 4 )
+file_path = "res://example/trees/mom_talk.json"
+
+[node name="Move" type="Node" parent="Mom"]
+script = ExtResource( 4 )
+file_path = "res://example/trees/mom_walk.json"
+
+[node name="Lad" parent="." instance=ExtResource( 3 )]
+position = Vector2( 870, 470 )
+animation = "son_sleep"
+
+[node name="Talk" type="Node" parent="Lad"]
+script = ExtResource( 4 )
+file_path = "res://example/trees/lad_talk.json"
+
+[node name="Move" type="Node" parent="Lad"]
+script = ExtResource( 4 )
+file_path = "res://example/trees/lad_move.json"
+
+[node name="Stick Boy" parent="." instance=ExtResource( 3 )]
+position = Vector2( 973, 36 )
+animation = "guard"
+flip_h = true
+
+[node name="Talk" type="Node" parent="Stick Boy"]
+script = ExtResource( 4 )
+file_path = "res://example/trees/stick_talk.json"
+
+[node name="Dog" parent="." instance=ExtResource( 3 )]
+position = Vector2( 185, 448 )
+animation = "dog"
+move_time = 0.5
+talks_with_move_tree = true
+
+[node name="Move" type="Node" parent="Dog"]
+script = ExtResource( 4 )
+file_path = "res://example/trees/dog_move.json"
+
+[node name="Player" type="AnimatedSprite" parent="."]
+position = Vector2( 507, 287 )
+frames = ExtResource( 1 )
+animation = "player"
+
+[node name="PlayerArea" type="Area2D" parent="Player"]
+
+[node name="PlayerCollider" type="CollisionShape2D" parent="Player/PlayerArea"]
+position = Vector2( -0.5, 9.5 )
+shape = SubResource( 1 )
+
+[node name="Dialog" type="Panel" parent="."]
+visible = false
+margin_left = 321.0
+margin_top = 469.0
+margin_right = 691.0
+margin_bottom = 592.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="Dialog"]
+margin_top = -20.0
+margin_right = 114.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Speaker" type="Label" parent="Dialog/Panel"]
+margin_left = 3.0
+margin_top = 4.0
+margin_right = 53.0
+margin_bottom = 18.0
+text = "Speaker"
+
+[node name="Text" type="Label" parent="Dialog"]
+margin_left = 8.0
+margin_top = 6.0
+margin_right = 363.0
+margin_bottom = 99.0
+text = "Hey"
+autowrap = true
+
+[node name="Choices" type="HBoxContainer" parent="Dialog"]
+margin_left = 32.0
+margin_top = 99.0
+margin_right = 346.0
+margin_bottom = 119.0
+rect_min_size = Vector2( 0, 20 )
+
+[node name="DogRange" type="Area2D" parent="."]
+position = Vector2( -2, 0 )
+
+[node name="DogCollider" type="CollisionShape2D" parent="DogRange"]
+position = Vector2( 182.25, 457 )
+shape = SubResource( 2 )
+
+[connection signal="talk" from="Mom" to="." method="_on_talk"]
+[connection signal="talk" from="Lad" to="." method="_on_talk"]
+[connection signal="talk" from="Stick Boy" to="." method="_on_talk"]
+[connection signal="talk" from="Dog" to="." method="_on_talk"]
+[connection signal="area_entered" from="Player/PlayerArea" to="." method="_on_PlayerArea_entered"]
+[connection signal="area_exited" from="Player/PlayerArea" to="." method="_on_PlayerArea_exited"]
+[connection signal="area_entered" from="DogRange" to="." method="_on_DogRange_entered"]
+[connection signal="area_exited" from="DogRange" to="." method="_on_DogRange_area_exited"]

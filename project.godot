@@ -138,6 +138,11 @@ _global_script_classes=[ {
 "class": "BranchEditor",
 "language": "GDScript",
 "path": "res://addons/the_branch/Editor/BranchEditor.gd"
+}, {
+"base": "AnimatedSprite",
+"class": "NPC",
+"language": "GDScript",
+"path": "res://example/Example_NPC.gd"
 } ]
 _global_script_class_icons={
 "BBoolFunction": "",
@@ -165,14 +170,19 @@ _global_script_class_icons={
 "BVarComparison": "",
 "BaseBNode": "",
 "BranchController": "",
-"BranchEditor": ""
+"BranchEditor": "",
+"NPC": ""
 }
 
 [application]
 
 config/name="The Branch"
-run/main_scene="res://addons/the_branch/Editor/BranchEditor.tscn"
+run/main_scene="res://Example.tscn"
 config/icon="res://icon.png"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/the_branch/plugin.cfg" )
 
 [physics]
 
@@ -180,4 +190,4 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
-environment/default_environment="res://default_env.tres"
+environment/default_environment="res://example/default_env.tres"

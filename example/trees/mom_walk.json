@@ -1,0 +1,125 @@
+[{
+        "node_name": "GraphNode7",
+        "pos_x": 340,
+        "pos_y": 100,
+        "rect_x": 534.320068,
+        "rect_y": 129.000015,
+        "text": "She walks a bit to the left... waits a bit... walks a bit to the right... waits a bit... then starts it all over!",
+        "type": "BCommentNode"
+    }, {
+        "node_name": "StartNode",
+        "pos_x": 80,
+        "pos_y": 360,
+        "rect_x": 96,
+        "rect_y": 65,
+        "type": "BStartNode"
+    }, {
+        "func": {
+            "name": "walk_dir",
+            "params": [{
+                    "name": "x",
+                    "type": 2,
+                    "value": -50
+                }, {
+                    "name": "y",
+                    "type": 2,
+                    "value": 0
+                }
+            ]
+        },
+        "node_name": "GraphNode2",
+        "pos_x": 220,
+        "pos_y": 280,
+        "rect_x": 231,
+        "rect_y": 153,
+        "type": "BFunctionCall"
+    }, {
+        "func": {
+            "name": "sleep",
+            "params": [{
+                    "name": "ms",
+                    "type": 2,
+                    "value": 500
+                }
+            ]
+        },
+        "node_name": "GraphNode3",
+        "pos_x": 480,
+        "pos_y": 280,
+        "rect_x": 244,
+        "rect_y": 123,
+        "type": "BFunctionCall"
+    }, {
+        "func": {
+            "name": "walk_dir",
+            "params": [{
+                    "name": "x",
+                    "type": 2,
+                    "value": 50
+                }, {
+                    "name": "y",
+                    "type": 2,
+                    "value": 0
+                }
+            ]
+        },
+        "node_name": "GraphNode4",
+        "pos_x": 760,
+        "pos_y": 260,
+        "rect_x": 231,
+        "rect_y": 153,
+        "type": "BFunctionCall"
+    }, {
+        "node_name": "GraphNode6",
+        "pos_x": 1280,
+        "pos_y": 300,
+        "rect_x": 121.000122,
+        "rect_y": 65,
+        "type": "BRepeatNode"
+    }, {
+        "func": {
+            "name": "sleep",
+            "params": [{
+                    "name": "ms",
+                    "type": 2,
+                    "value": 500
+                }
+            ]
+        },
+        "node_name": "GraphNode5",
+        "pos_x": 1020,
+        "pos_y": 260,
+        "rect_x": 244,
+        "rect_y": 123,
+        "type": "BFunctionCall"
+    }, {
+        "connections": [{
+                "from": "StartNode",
+                "from_port": 0,
+                "to": "GraphNode2",
+                "to_port": 0
+            }, {
+                "from": "GraphNode2",
+                "from_port": 0,
+                "to": "GraphNode3",
+                "to_port": 0
+            }, {
+                "from": "GraphNode3",
+                "from_port": 0,
+                "to": "GraphNode4",
+                "to_port": 0
+            }, {
+                "from": "GraphNode4",
+                "from_port": 0,
+                "to": "GraphNode5",
+                "to_port": 0
+            }, {
+                "from": "GraphNode5",
+                "from_port": 0,
+                "to": "GraphNode6",
+                "to_port": 0
+            }
+        ],
+        "is_connection_list": true
+    }
+]
