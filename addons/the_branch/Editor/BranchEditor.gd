@@ -1,7 +1,7 @@
 tool
 class_name BranchEditor
 extends Control
-signal open_file_dialog
+signal open_file_dialog(type)
 
 onready var graph:BGraphEdit = $MainView/GraphEdit
 onready var save_button := $MainView/Buttons/InnerContainer/SaveButton
@@ -10,43 +10,67 @@ onready var save_template_popup := $MainView/TemplateDialog
 onready var save_template_name := $MainView/TemplateDialog/VBoxContainer/NameGroup/TemplateName
 onready var save_template_group := $MainView/TemplateDialog/VBoxContainer/GroupGroup/GroupName
 onready var template_button := $MainView/Buttons/InnerContainer/Template
+
+onready var no_selection_message := $NoSelectionMessage
+onready var add_new_message := $AddNewMessage
+onready var main_view := $MainView
+onready var source_popup := $ViewSourceError
+
 var active_branch:BranchController
+var file_dialog:FileDialog
 
 func _ready():
-	if true:
-		var dtn := BranchController.new()
-		dtn.file_path = "res://debug.json"
-		_set_up_branch(dtn)
-	else: _set_up_branch(null)
+	_set_up_branch(null)
+	_set_up_file_dialog()
 	load_templates()
 
-func _on_CreateNewButton_pressed(): emit_signal("open_file_dialog")
+func _set_up_file_dialog():
+	file_dialog = FileDialog.new()
+	file_dialog.mode = FileDialog.MODE_SAVE_FILE
+	file_dialog.access = FileDialog.ACCESS_RESOURCES
+	file_dialog.set_filters(PoolStringArray(["*.json ; Branch JSON Files"]))
+	file_dialog.connect("file_selected", self, "_on_file_saved")
+	add_child(file_dialog)
+func _open_file_dialog(mode:int):
+	file_dialog.mode = mode
+	file_dialog.popup_centered_ratio()
+func _on_file_saved(path:String):
+	if path == null || path == "" || path.find("res://") != 0: return
+	got_file_path(path)
+
+func _on_OpenBranchButton_pressed(): _open_file_dialog(FileDialog.MODE_OPEN_FILE)
+func _on_NewBranchButton_pressed(): _open_file_dialog(FileDialog.MODE_SAVE_FILE)
+func _on_CreateNewButton_pressed(): _open_file_dialog(FileDialog.MODE_SAVE_FILE)
 func got_file_path(path:String):
+	if active_branch == null:
+		active_branch = BranchController.new()
+		active_branch.not_in_scene = true
 	active_branch.file_path = path
 	_set_up_branch(active_branch)
 	_on_save()
 
 func _set_up_branch(branch:BranchController):
+	if !graph.is_inside_tree(): return
 	graph.clear()
 	var has_loaded_data := false
 	if branch == null:
-		$NoNodeMessage.visible = true
-		$AddNewMessage.visible = false
-		$MainView.visible = false
+		no_selection_message.visible = true
+		add_new_message.visible = false
+		main_view.visible = false
 	else:
-		$NoNodeMessage.visible = false
+		no_selection_message.visible = false
 		if branch.file_path == "":
-			$AddNewMessage.visible = true
-			$MainView.visible = false
+			add_new_message.visible = true
+			main_view.visible = false
 		else:
-			$AddNewMessage.visible = false
-			$MainView.visible = true
+			add_new_message.visible = false
+			main_view.visible = true
 			has_loaded_data = _open_file(branch.file_path)
 	active_branch = branch
 	if !has_loaded_data:
-		for c in get_children():
+		for c in graph.get_children():
 			if c is BaseBNode: graph.remove_child(c)
-		var sn:BStartNode = preload("res://addons/the_branch/Nodes/BStartNode.gd").instance()
+		var sn:BStartNode = preload("res://addons/the_branch/Nodes/BStartNode.gd").new()
 		graph.add_child(sn)
 	save_button.text = "Save"
 func _open_file(tree_path:String) -> bool:

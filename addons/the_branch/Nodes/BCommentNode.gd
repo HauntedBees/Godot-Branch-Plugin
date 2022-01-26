@@ -21,6 +21,8 @@ func _ready():
 	text_edit.text = text
 	text_edit.connect("text_changed", self, "_on_text_change")
 	text_edit.rect_min_size = Vector2(150, 100)
+	text_edit.size_flags_horizontal = SIZE_EXPAND_FILL
+	text_edit.size_flags_vertical = SIZE_EXPAND_FILL
 	comment = true
 	add_child(text_edit)
 

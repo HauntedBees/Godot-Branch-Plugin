@@ -29,7 +29,7 @@ func addtl_restore(d:Dictionary):
 func _ready():
 	add_choice_button = Button.new()
 	add_choice_button.text = "Add Choice"
-	add_choice_button.hint_tooltip = "Add some choioces to this dialog node."
+	add_choice_button.hint_tooltip = "Add some choices to this dialog node."
 	add_choice_button.size_flags_horizontal = SIZE_EXPAND_FILL
 	add_choice_button.connect("pressed", self, "_add_choice")
 	add_child(add_choice_button)

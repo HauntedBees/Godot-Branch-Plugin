@@ -3,7 +3,7 @@ class_name BBoolSequence
 extends BaseBNode
 
 func display_name() -> String: return "Boolean Sequence"
-func hint() -> String: return "Executes all of the functions on the parent node in order, then advances to the next node."
+func hint() -> String: return "Executes all of the functions on the parent node in order, then advances based on the first function to return \"true.\""
 
 var functions := []
 

@@ -48,6 +48,7 @@ func _ready():
 	
 	value_node = BTypedInput.new()
 	value_node.connect("change_made", self, "_on_change_made")
+	value_node.size_flags_horizontal = SIZE_EXPAND_FILL
 	add_child(value_node)
 
 func set_comparison(i:int):
