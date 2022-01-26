@@ -3,7 +3,7 @@ class_name BFunctionCall
 extends BaseBNode
 
 func display_name() -> String: return "Function Call"
-func hint() -> String: return "Executes the function on the parent node, then advances to the next node."
+func hint() -> String: return "Executes the function on the Parent Node, then advances to the next node."
 
 var function:BInnerFunction
 

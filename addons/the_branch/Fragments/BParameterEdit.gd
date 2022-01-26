@@ -40,7 +40,7 @@ func _ready():
 	label_type.text = "Type"
 	hbox_type.add_child(label_type)
 	type_edit = OptionButton.new()
-	type_edit.hint_tooltip = "The type of the parameter. If \"var\" is selected, then this value is treated as the name of a property on the BranchController's parent."
+	type_edit.hint_tooltip = "The type of the parameter. If \"var\" is selected, then this value is treated as the name of a property on the Parent Node."
 	type_edit.add_item("String")
 	type_edit.add_item("int")
 	type_edit.add_item("float")

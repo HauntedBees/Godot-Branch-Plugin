@@ -3,7 +3,7 @@ class_name BBoolFunction
 extends BaseBNode
 
 func display_name() -> String: return "Boolean Function"
-func hint() -> String: return "Evaluates a bool function on the parent node and then advances based on the result."
+func hint() -> String: return "Evaluates a bool function on the Parent Node and then advances based on the result."
 
 var function:BInnerFunction
 

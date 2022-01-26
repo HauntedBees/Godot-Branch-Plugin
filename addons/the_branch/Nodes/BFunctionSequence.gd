@@ -3,7 +3,7 @@ class_name BFunctionSequence
 extends BaseBNode
 
 func display_name() -> String: return "Function Sequence"
-func hint() -> String: return "Executes all of the functions on the parent node in order, then advances to the next node."
+func hint() -> String: return "Executes all of the functions on the Parent Node in order, then advances to the next node."
 
 var functions := []
 var num_elements := 0

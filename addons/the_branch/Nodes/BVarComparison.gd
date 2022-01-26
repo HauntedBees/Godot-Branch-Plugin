@@ -3,7 +3,7 @@ class_name BVarComparison
 extends BaseBNode
 
 func display_name() -> String: return "Variable Comparison"
-func hint() -> String: return "Compares a Property on the parent node and then advances based on the first matching condition."
+func hint() -> String: return "Compares a Property on the Parent Node and then advances based on the first matching condition."
 
 var var_name_node:LineEdit
 var comparisons := []

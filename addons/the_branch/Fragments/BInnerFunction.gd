@@ -35,7 +35,7 @@ func _ready():
 	function_node.size_flags_horizontal = SIZE_EXPAND_FILL
 	function_node.placeholder_text = "Function Name"
 	function_node.text = function_name
-	function_node.hint_tooltip = "The name of a function in the BranchController's parent."
+	function_node.hint_tooltip = "The name of a function in the Parent Node."
 	function_node.connect("text_changed", self, "_on_text_change")
 	hb.add_child(function_node)
 	

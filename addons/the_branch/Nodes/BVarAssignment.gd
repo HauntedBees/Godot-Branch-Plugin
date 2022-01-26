@@ -3,7 +3,7 @@ class_name BVarAssignment
 extends BaseBNode
 
 func display_name() -> String: return "Variable Assignment"
-func hint() -> String: return "Assigns a property on the parent node to the provided value."
+func hint() -> String: return "Assigns a property on the Parent Node to the provided value."
 
 var name_node:LineEdit
 var val_node:BTypedInput
@@ -28,7 +28,7 @@ func _ready():
 	name_node = LineEdit.new()
 	name_node.text = var_name
 	name_node.placeholder_text = "Variable Name"
-	name_node.hint_tooltip = "The name of a Property on the parent node that will be reassigned."
+	name_node.hint_tooltip = "The name of a Property on the Parent Node that will be reassigned."
 	name_node.size_flags_horizontal = SIZE_EXPAND_FILL
 	name_node.connect("text_changed", self, "_on_name_change")
 	vb.add_child(name_node)

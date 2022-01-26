@@ -34,7 +34,7 @@ func _ready():
 	add_child(bool_edit)
 	
 	type_selector = OptionButton.new()
-	type_selector.hint_tooltip = "The type of the variable. If \"var\" is selected, then this value is treated as the name of a property on the BranchController's parent."
+	type_selector.hint_tooltip = "The type of the variable. If \"var\" is selected, then this value is treated as the name of a property on the Parent Node."
 	type_selector.add_item("String")
 	type_selector.add_item("int")
 	type_selector.add_item("float")

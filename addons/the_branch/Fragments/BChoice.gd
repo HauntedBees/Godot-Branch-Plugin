@@ -63,7 +63,7 @@ func _ready():
 	var_name_node.placeholder_text = "Property Name"
 	var_name_node.size_flags_horizontal = SIZE_EXPAND_FILL
 	var_name_node.connect("text_changed", self, "_on_var_name_change")
-	var_name_node.hint_tooltip = "The name of a property on the BranchController's parent to compare against."
+	var_name_node.hint_tooltip = "The name of a property on the Parent Node to compare against."
 	prop_node.add_child(var_name_node)
 	
 	var_node = BVarCompare.new()
