@@ -10,6 +10,8 @@ func addtl_save(dict:Dictionary) -> Dictionary:
 	return dict
 
 func _ready():
+	show_close = false
+	name = "StartNode"
 	add_child(separator())
 	var label := Label.new()
 	label.text = "Start"

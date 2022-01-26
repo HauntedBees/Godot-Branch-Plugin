@@ -40,7 +40,7 @@ func _on_drag_request(from:Vector2, to:Vector2):
 
 func save() -> Dictionary:
 	var save_dict := {
-		"name": name,
+		"node_name": name,
 		"type": "BaseBNode",
 		"pos_x": offset.x,
 		"pos_y": offset.y,
@@ -51,7 +51,7 @@ func save() -> Dictionary:
 func addtl_save(dict:Dictionary) -> Dictionary: return dict
 
 func restore(dict:Dictionary, set_position:bool = true):
-	name = dict["name"]
+	name = dict["node_name"]
 	if set_position: offset = Vector2(dict["pos_x"], dict["pos_y"])
 	rect_size = Vector2(dict["rect_x"], dict["rect_y"])
 	addtl_restore(dict)
