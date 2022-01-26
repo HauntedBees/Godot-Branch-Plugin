@@ -1,0 +1,147 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://AllExample.gd" type="Script" id=1]
+[ext_resource path="res://addons/the_branch/BranchController.gd" type="Script" id=2]
+
+[node name="AllExample" type="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BranchController" type="Node" parent="."]
+script = ExtResource( 2 )
+file_path = "res://AllExample.json"
+
+[node name="StepButton" type="Button" parent="."]
+margin_left = 213.0
+margin_top = 327.0
+margin_right = 351.0
+margin_bottom = 399.0
+text = "STEP"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RestartButton" type="Button" parent="."]
+margin_left = 212.0
+margin_top = 406.0
+margin_right = 349.0
+margin_bottom = 426.0
+text = "Restart"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WriteOutput" type="Label" parent="."]
+margin_left = 279.0
+margin_top = 495.0
+margin_right = 485.0
+margin_bottom = 532.0
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CurrentNodeInfo" type="TextEdit" parent="."]
+margin_left = 130.0
+margin_top = 128.0
+margin_right = 508.0
+margin_bottom = 311.0
+readonly = true
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IsEnd" type="CheckBox" parent="."]
+margin_left = 113.0
+margin_top = 454.0
+margin_right = 250.0
+margin_bottom = 478.0
+disabled = true
+text = "Is End of Branch?"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SomeString" type="LineEdit" parent="."]
+margin_left = 795.0
+margin_top = 128.0
+margin_right = 936.0
+margin_bottom = 152.0
+text = "Change me!"
+placeholder_text = "some_string"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SomeInt" type="SpinBox" parent="."]
+margin_left = 799.0
+margin_top = 160.0
+margin_right = 873.0
+margin_bottom = 184.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Irrelevant" type="Node" parent="."]
+
+[node name="Label" type="Label" parent="Irrelevant"]
+margin_left = 280.0
+margin_top = 46.0
+margin_right = 765.0
+margin_bottom = 128.0
+text = "This example walks through a Branch JSON file that uses every Node Type. Click the \"Step\" button on the left to move on to the next Node, and use the inputs on the right to alter variable values."
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="Irrelevant"]
+margin_left = 123.0
+margin_top = 495.0
+margin_right = 286.0
+margin_bottom = 516.0
+text = "write_message output:"
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="Label3" type="Label" parent="Irrelevant"]
+margin_left = 30.0
+margin_top = 138.0
+margin_right = 123.0
+margin_bottom = 152.0
+text = "Current Node:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label4" type="Label" parent="Irrelevant"]
+margin_left = 704.0
+margin_top = 134.0
+margin_right = 786.0
+margin_bottom = 148.0
+text = "some_string:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label5" type="Label" parent="Irrelevant"]
+margin_left = 717.0
+margin_top = 165.0
+margin_right = 776.0
+margin_bottom = 179.0
+text = "some_int:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="StepButton" to="." method="_on_StepButton_pressed"]
+[connection signal="pressed" from="RestartButton" to="." method="_on_RestartButton_pressed"]
+[connection signal="text_changed" from="SomeString" to="." method="_on_SomeString_text_changed"]
+[connection signal="value_changed" from="SomeInt" to="." method="_on_SomeInt_value_changed"]
