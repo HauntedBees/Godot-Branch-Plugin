@@ -1,0 +1,46 @@
+[{
+        "group": "Movement",
+        "name": "walk_dir",
+        "template": {
+            "func": {
+                "name": "walk_dir",
+                "params": [{
+                        "name": "x",
+                        "type": 2,
+                        "value": 0
+                    }, {
+                        "name": "y",
+                        "type": 2,
+                        "value": 0
+                    }
+                ]
+            },
+            "name": "GraphNode2",
+            "pos_x": 500,
+            "pos_y": 260,
+            "rect_x": 231,
+            "rect_y": 153,
+            "type": "BFunctionCall"
+        }
+    }, {
+        "group": "Misc",
+        "name": "Sleep",
+        "template": {
+            "func": {
+                "name": "sleep",
+                "params": [{
+                        "name": "ms",
+                        "type": 2,
+                        "value": 0
+                    }
+                ]
+            },
+            "name": "GraphNode3",
+            "pos_x": 700,
+            "pos_y": 280,
+            "rect_x": 244,
+            "rect_y": 123,
+            "type": "BFunctionCall"
+        }
+    }
+]

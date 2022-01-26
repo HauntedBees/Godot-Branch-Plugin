@@ -1,7 +1,8 @@
 tool
 class_name BranchEditor
 extends Control
-signal open_file_dialog(type)
+
+signal view_source
 
 onready var graph:BGraphEdit = $MainView/GraphEdit
 onready var save_button := $MainView/Buttons/InnerContainer/SaveButton
@@ -15,13 +16,14 @@ onready var no_selection_message := $NoSelectionMessage
 onready var add_new_message := $AddNewMessage
 onready var main_view := $MainView
 onready var source_popup := $ViewSourceError
+onready var source_error := $ViewSourceError/VSMessage
 
 var active_branch:BranchController
 var file_dialog:FileDialog
 
 func _ready():
-	_set_up_branch(null)
 	_set_up_file_dialog()
+	set_up_branch(null)
 	load_templates()
 
 func _set_up_file_dialog():
@@ -46,11 +48,11 @@ func got_file_path(path:String):
 		active_branch = BranchController.new()
 		active_branch.not_in_scene = true
 	active_branch.file_path = path
-	_set_up_branch(active_branch)
+	set_up_branch(active_branch)
 	_on_save()
 
-func _set_up_branch(branch:BranchController):
-	if !graph.is_inside_tree(): return
+func set_up_branch(branch:BranchController):
+	if graph == null || !graph.is_inside_tree(): return
 	graph.clear()
 	var has_loaded_data := false
 	if branch == null:
@@ -71,7 +73,7 @@ func _set_up_branch(branch:BranchController):
 		for c in graph.get_children():
 			if c is BaseBNode: graph.remove_child(c)
 		var sn:BStartNode = preload("res://addons/the_branch/Nodes/BStartNode.gd").new()
-		graph.add_child(sn)
+		graph.add_node(sn, true)
 	save_button.text = "Save"
 func _open_file(tree_path:String) -> bool:
 	var f := File.new()
@@ -141,9 +143,19 @@ func _on_add_new_node_from_template(type:String):
 	graph.restore_bnode_from_dictionary(template_dict, true)
 func load_templates():
 	var f := File.new()
-	var opened := f.open("res://addons/the_branch/templates.json", File.READ)
+	var opened := f.open("res://branch_templates.json", File.READ)
 	if opened != OK: return
 	var tmps := f.get_as_text()
 	f.close()
 	graph.user_templates = parse_json(tmps)
 	_on_refresh_templates() 
+
+func _on_view_source(func_info:Dictionary, is_bool:bool):
+	if active_branch.not_in_scene:
+		source_error.text = "To view the source of a function, this Branch JSON file must be attached to a BranchController node. Please select a BranchController node from the Scene Tab and edit this Branch JSON file from there."
+		source_popup.popup_centered()
+	else: emit_signal("view_source", func_info, is_bool)
+func display_view_source_error(msg:String):
+	source_error.text = msg
+	source_popup.popup_centered()
+	

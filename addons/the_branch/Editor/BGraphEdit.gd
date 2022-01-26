@@ -1,3 +1,4 @@
+tool
 class_name BGraphEdit
 extends GraphEdit
 
@@ -5,6 +6,7 @@ signal change_made
 signal bnode_selected
 signal bnode_unselected
 signal refresh_templates
+signal view_source(func_info, is_bool)
 
 const NODE_TYPES := {
 	"Function Call": preload("res://addons/the_branch/Nodes/BFunctionCall.gd"),
@@ -165,7 +167,7 @@ func save_template(name:String, group:String):
 		"template": selected_node.save()
 	})
 	var f := File.new()
-	var opened := f.open("res://addons/the_branch/templates.json", File.WRITE)
+	var opened := f.open("res://branch_templates.json", File.WRITE)
 	if opened != OK:
 		print("Couldn't save template!")
 		return
