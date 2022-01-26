@@ -113,6 +113,7 @@ func _on_SaveTemplateButton_pressed():
 	save_template_name.text = ""
 	save_template_group.text = ""
 	save_template_popup.popup()
+	graph.set_selected(graph.selected_node)
 func _on_TemplateDialog_confirmed(): graph.save_template(save_template_name.text, save_template_group.text)
 func _on_refresh_templates():
 	var popup:PopupMenu = template_button.get_popup()
