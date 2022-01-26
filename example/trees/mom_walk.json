@@ -3,7 +3,7 @@
         "pos_x": 340,
         "pos_y": 100,
         "rect_x": 534.320068,
-        "rect_y": 129.000015,
+        "rect_y": 129.000031,
         "text": "She walks a bit to the left... waits a bit... walks a bit to the right... waits a bit... then starts it all over!",
         "type": "BCommentNode"
     }, {
@@ -30,7 +30,7 @@
         "node_name": "GraphNode2",
         "pos_x": 220,
         "pos_y": 280,
-        "rect_x": 231,
+        "rect_x": 231.000031,
         "rect_y": 153,
         "type": "BFunctionCall"
     }, {
@@ -120,6 +120,9 @@
                 "to_port": 0
             }
         ],
-        "is_connection_list": true
+        "is_connection_list": true,
+        "offset_x": -157.333374,
+        "offset_y": -137.72226,
+        "zoom": 0.694444
     }
 ]

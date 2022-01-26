@@ -86,9 +86,8 @@ func _open_file(tree_path:String) -> bool:
 	graph.clear()
 	for c in json:
 		if c.has("is_connection_list"):
-			if c.has("zoom"):
-				graph.zoom = c["zoom"]
-				graph.scroll_offset = Vector2(c["offset_x"], c["offset_y"])
+			graph.zoom = c["zoom"]
+			graph.scroll_offset = Vector2(c["offset_x"], c["offset_y"])
 			for cn in c["connections"]:
 				graph.connect_dictionary(cn)
 		else: graph.restore_bnode_from_dictionary(c)

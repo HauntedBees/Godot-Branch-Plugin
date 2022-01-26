@@ -131,7 +131,7 @@
         "pos_x": 2060,
         "pos_y": 580,
         "rect_x": 242,
-        "rect_y": 397,
+        "rect_y": 396.999969,
         "speaker": "You",
         "text": "Hey doggy...",
         "type": "BDialogChoice"
@@ -151,7 +151,7 @@
         "pos_x": 2660,
         "pos_y": 760,
         "rect_x": 242,
-        "rect_y": 159,
+        "rect_y": 158.999969,
         "speaker": "You",
         "text": "Wow, that really worked!",
         "type": "BDialog"
@@ -161,7 +161,7 @@
         "pos_x": 2360,
         "pos_y": 760,
         "rect_x": 242,
-        "rect_y": 159,
+        "rect_y": 158.999969,
         "speaker": "Dog",
         "text": "Bow wow!!",
         "type": "BDialog"
@@ -171,7 +171,7 @@
         "pos_x": 2920,
         "pos_y": 780,
         "rect_x": 212,
-        "rect_y": 85,
+        "rect_y": 85.000031,
         "type": "BVarAssignment",
         "value": true,
         "var_type": 3
@@ -181,7 +181,7 @@
         "pos_x": 1560,
         "pos_y": 900,
         "rect_x": 198,
-        "rect_y": 255,
+        "rect_y": 255.000031,
         "type": "BRandom",
         "weighted": true
     }, {
@@ -262,7 +262,7 @@
         "pos_x": 1800,
         "pos_y": 920,
         "rect_x": 246,
-        "rect_y": 153,
+        "rect_y": 152.999969,
         "type": "BFunctionCall"
     }, {
         "func": {
@@ -415,6 +415,9 @@
                 "to_port": 0
             }
         ],
-        "is_connection_list": true
+        "is_connection_list": true,
+        "offset_x": 584.666626,
+        "offset_y": 164.27774,
+        "zoom": 0.694444
     }
 ]

@@ -143,6 +143,9 @@
                 "to_port": 0
             }
         ],
-        "is_connection_list": true
+        "is_connection_list": true,
+        "offset_x": 575.666626,
+        "offset_y": 10.27774,
+        "zoom": 0.694444
     }
 ]

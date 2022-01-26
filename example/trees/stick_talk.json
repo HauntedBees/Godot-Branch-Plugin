@@ -62,7 +62,7 @@
         "pos_x": 1820,
         "pos_y": 680,
         "rect_x": 329,
-        "rect_y": 168,
+        "rect_y": 168.000031,
         "speaker": "Dog Guardian",
         "text": "You truly are the chosen one... Thank you for this gift of dog beholding.",
         "type": "BDialog"
@@ -92,7 +92,7 @@
         "pos_x": 2180,
         "pos_y": 680,
         "rect_x": 384,
-        "rect_y": 199,
+        "rect_y": 199.000031,
         "speaker": "Dog Guardian",
         "text": "Also congrats on beating this example project I hope it convinces you that this Branch plugin is the coolest thing since sliced Godot.",
         "type": "BDialog"
@@ -191,6 +191,9 @@
                 "to_port": 0
             }
         ],
-        "is_connection_list": true
+        "is_connection_list": true,
+        "offset_x": 658.666626,
+        "offset_y": -13.72226,
+        "zoom": 0.694444
     }
 ]

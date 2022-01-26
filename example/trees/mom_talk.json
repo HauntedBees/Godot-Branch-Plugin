@@ -10,7 +10,7 @@
         "node_name": "GraphNode2",
         "pos_x": 80,
         "pos_y": -240,
-        "rect_x": 228,
+        "rect_x": 228.000031,
         "rect_y": 129,
         "text": "Check the value of a variable to determine where to go next.",
         "type": "BCommentNode"
@@ -64,7 +64,7 @@
         "pos_x": 1000,
         "pos_y": -40,
         "rect_x": 99,
-        "rect_y": 65,
+        "rect_y": 65.000031,
         "type": "BEndNode"
     }, {
         "node_name": "GraphNode4",
@@ -72,7 +72,7 @@
         "pos_x": 420,
         "pos_y": -40,
         "rect_x": 267,
-        "rect_y": 189,
+        "rect_y": 189.000031,
         "speaker": "Concerned Mum",
         "text": "Oh, you've found my son? He's okay? Oh, that's excellent news! Thank you!",
         "type": "BDialog"
@@ -144,6 +144,9 @@
                 "to_port": 0
             }
         ],
-        "is_connection_list": true
+        "is_connection_list": true,
+        "offset_x": -307.333374,
+        "offset_y": -338.72226,
+        "zoom": 0.694444
     }
 ]

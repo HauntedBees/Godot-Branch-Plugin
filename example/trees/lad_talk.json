@@ -25,7 +25,7 @@
         "pos_x": 760,
         "pos_y": 280,
         "rect_x": 279,
-        "rect_y": 174,
+        "rect_y": 173.999985,
         "speaker": "Kid",
         "text": "Bugs are cool as heck! I want to be a bug when I grow up.",
         "type": "BDialog"
@@ -42,7 +42,7 @@
         "pos_x": 740,
         "pos_y": 480,
         "rect_x": 242,
-        "rect_y": 159,
+        "rect_y": 159.000031,
         "speaker": "Kid",
         "text": "Zzzzzz...",
         "type": "BDialog"
@@ -97,7 +97,7 @@
         "pos_x": 2259,
         "pos_y": 671.5,
         "rect_x": 400,
-        "rect_y": 151,
+        "rect_y": 150.999969,
         "text": "A dialog tree must end in a non-dialog node. Normally the \"Flow/End\" node is used, but as long as it's any non-dialog node, you're good! This variable assignment is a fine end!",
         "type": "BCommentNode"
     }, {
@@ -158,6 +158,9 @@
                 "to_port": 0
             }
         ],
-        "is_connection_list": true
+        "is_connection_list": true,
+        "offset_x": 141.666626,
+        "offset_y": 6.27774,
+        "zoom": 0.694444
     }
 ]
