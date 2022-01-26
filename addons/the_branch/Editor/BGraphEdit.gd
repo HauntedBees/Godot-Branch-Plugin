@@ -34,7 +34,10 @@ func get_save_data() -> Array:
 		res.append(c.save())
 	res.append({
 		"is_connection_list": true,
-		"connections": get_connection_list()
+		"connections": get_connection_list(),
+		"zoom": zoom,
+		"offset_x": scroll_offset.x,
+		"offset_y": scroll_offset.y
 	})
 	return res
 func clear():
