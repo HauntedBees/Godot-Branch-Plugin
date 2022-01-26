@@ -34,6 +34,7 @@ func _add_parameter(d:Dictionary):
 	param.connect("change_made", parent_node, "_on_change")
 	parameters.append(param)
 	param_container.add_child(param)
+	parent_node._on_change()
 	if d.has("name"):
 		param.field_name = d["name"]
 		param.field_type = d["type"]

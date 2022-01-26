@@ -98,3 +98,4 @@ func _on_metadata_save():
 	field_type = edit_popup.param_type
 	_toggle_field_display()
 	edit_popup.visible = false
+	emit_signal("change_made")
