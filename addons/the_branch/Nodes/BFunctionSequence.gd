@@ -36,6 +36,7 @@ func _on_add_function(d:Dictionary = {}):
 	if d.has("name"): func_node.restore_from_dictionary(d)
 	functions.append(func_node)
 	func_node.connect("change_made", self, "_on_change")
+	func_node.connect("view_source", self, "_on_view_source", [false])
 	func_node.connect("delete", self, "_on_delete_function", [func_node])
 
 func _on_delete_function(f:BInnerFunction):

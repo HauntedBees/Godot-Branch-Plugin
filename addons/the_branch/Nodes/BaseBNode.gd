@@ -25,6 +25,7 @@ func _ready():
 	connect("resize_request", self, "_on_resize_request")
 	connect("dragged", self, "_on_drag_request")
 
+func _on_view_source(func_info:Dictionary, is_bool:bool): emit_signal("view_source", func_info, is_bool)
 func _on_change(): emit_signal("change_made")
 func _on_change_arg(_v): emit_signal("change_made")
 func _on_close_request():

@@ -47,6 +47,7 @@ func _on_add_function(d:Dictionary = {}):
 	functions.append(func_node)
 	func_node.connect("change_made", self, "_on_change")
 	func_node.connect("delete", self, "_on_delete_function", [func_node])
+	func_node.connect("view_source", self, "_on_view_source", [true])
 	move_child(func_node, functions.size())
 	set_slot(functions.size() + 1, false, 0, SLOT_COLOR, true, 0, SLOT_COLOR)
 	emit_signal("insert_slot", name, functions.size() - 1)

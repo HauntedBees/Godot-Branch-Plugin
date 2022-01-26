@@ -60,7 +60,7 @@ func restore_from_dictionary(d:Dictionary):
 func _on_change(): emit_signal("change_made")
 func _on_change_arg(_v): emit_signal("change_made")
 func _on_delete(): emit_signal("delete")
-func _on_view_source(): emit_signal("view_source")
+func _on_view_source(): emit_signal("view_source", get_as_dictionary())
 func _on_text_change(t:String):
 	function_name = t
 	emit_signal("change_made")
