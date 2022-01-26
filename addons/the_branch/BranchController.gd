@@ -72,7 +72,7 @@ func get_dialog_choices() -> Array:
 	if current_node["type"] != "BDialogChoice": return []
 	var available_choices := []
 	for c in current_node["choices"]:
-		match c["condition"]:
+		match int(c["type"]):
 			0: available_choices.append(c["text"])
 			1: if _call_function(c["func"]): available_choices.append(c["text"])
 			2: if _compare_variables(_get_variable(c["comparison"]["property"]), c["comparison"]): available_choices.append(c["text"])

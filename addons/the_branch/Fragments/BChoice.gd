@@ -2,6 +2,7 @@ tool
 class_name BChoice
 extends PanelContainer
 
+signal view_source(func_info)
 signal change_made
 signal delete
 
@@ -25,6 +26,7 @@ func _ready():
 	var vb := VBoxContainer.new()
 	vb.size_flags_horizontal = SIZE_EXPAND_FILL
 	add_child(vb)
+	vb.add_child(HSeparator.new())
 	
 	text_node = BDeleteInput.new()
 	text_node.placeholder = "Choice"
@@ -47,6 +49,8 @@ func _ready():
 	func_node = BInnerFunction.new()
 	func_node.allow_delete = false
 	func_node.visible = display_type == FUNCTION_CALL
+	func_node.connect("change_made", self, "_on_change")
+	func_node.connect("view_source", self, "_on_view_source")
 	vb.add_child(func_node)
 	
 	prop_node = VBoxContainer.new()
@@ -108,5 +112,6 @@ func _on_display_type_changed(i:int):
 func _on_var_name_change(s:String):
 	var_name = s
 	emit_signal("change_made")
-func _on_change(i): emit_signal("change_made")
+func _on_change(): emit_signal("change_made")
 func _on_delete(): emit_signal("delete")
+func _on_view_source(func_info:Dictionary): emit_signal("view_source", func_info)

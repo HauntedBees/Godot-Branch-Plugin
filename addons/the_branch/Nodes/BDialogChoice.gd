@@ -43,7 +43,9 @@ func _add_choice(d:Dictionary = {}):
 	choices.append(choice)
 	choice.connect("change_made", self, "_on_change")
 	choice.connect("delete", self, "_on_choice_delete", [choice])
+	choice.connect("view_source", self, "_on_view_source", [true])
 	set_slot(num_elements + choices.size(), false, 0, SLOT_COLOR, true, 0, SLOT_COLOR)
+	emit_signal("change_made")
 func _on_choice_delete(c:BChoice):
 	var idx := choices.find(c)
 	emit_signal("change_made")

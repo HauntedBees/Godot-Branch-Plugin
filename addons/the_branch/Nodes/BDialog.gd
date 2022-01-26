@@ -51,6 +51,7 @@ func _ready():
 	body_node.size_flags_horizontal = SIZE_EXPAND_FILL
 	body_node.size_flags_vertical = SIZE_EXPAND_FILL
 	body_node.text = value
+	body_node.wrap_enabled = true
 	body_node.rect_min_size = Vector2(0, 60)
 	body_node.connect("text_changed", self, "_on_value_change", [body_node])
 	add_child(body_node)

@@ -16,7 +16,7 @@ var value setget set_value, get_value
 
 func _ready():
 	text_edit = LineEdit.new()
-	text_edit.placeholder_text = "New Value"
+	text_edit.placeholder_text = "Value"
 	text_edit.size_flags_horizontal = SIZE_EXPAND_FILL
 	text_edit.connect("text_changed", self, "_on_change")
 	add_child(text_edit)
@@ -29,7 +29,7 @@ func _ready():
 	add_child(num_edit)
 	
 	bool_edit = CheckBox.new()
-	bool_edit.text = "New Value"
+	bool_edit.text = "Value"
 	bool_edit.connect("toggled", self, "_on_change")
 	add_child(bool_edit)
 	

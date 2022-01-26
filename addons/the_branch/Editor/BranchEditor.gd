@@ -139,7 +139,7 @@ func _on_add_new_node_from_template(type:String):
 		if d["name"] == type:
 			template_dict = d["template"]
 			break
-	if !template_dict.has("name"): return
+	if !template_dict.has("node_name"): return
 	graph.restore_bnode_from_dictionary(template_dict, true)
 func load_templates():
 	var f := File.new()
