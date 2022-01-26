@@ -58,3 +58,66 @@ A function call requires the name of a **function** on the **Parent Node** and z
 
 ### Variables
 In the case of the **Variable Assignment** and **Variable Comparison** Nodes, and anywhere you can specify *var* as a parameter/variable type, the name of a variable on the **Parent Node** can be specified, which will be assigned/evaluated when the node is reached. Some flexibility is allowed, so you can access array parts like `arr[5]` or dictionary values like `dict["key"]`.
+
+# Usage
+Once you've added a **BranchController** as a child to your **Parent Node** and created a **Branch JSON** file, you'll probably want to do something with it. The **BranchController** has several properties and functions for your usage.
+
+## Methods
+
+### get_next_dialog(stop_at_loop:bool = false) -> Dictionary
+Moves to the next available dialog (or dialog choice) node, evaluating and branching through any non-dialog nodes in the process.
+#### stop_at_loop
+If you have **Restart Nodes** in your dialog tree, setting this argument to `true` will treat them as **End Nodes** and halt iteration. If there's a chance your tree could lead to an infinite loop, set this to `true`.
+#### Response
+The response will be the dictionary `{"end": true}` if there are no dialog nodes left, or a dictionary with the following keys:
+ - **speaker**:String
+ - **text**:String
+ - **choices** - an array of applicable choices as strings
+ - **aparams** - any provided parameters in an array, ordered based on the order they were given in
+ - **dparams** - any provided parameters in a dictionary, with the specified parameter names being the dictionary keys
+
+### get_dialog_info() -> Dictionarry
+Returns a dictionary in the same format described for `get_next_dialog` for the current node. If the current node is *not* a **Dialog** or **Dialog Choice** node, this returns the dictionary `{"error": true}`.
+
+### get_dialog_choices() -> Array
+Returns an array of all applicable choices for the current node as strings. If the current node is not a **Dialog Choice** node this returns an empty array.
+
+### make_dialog_choice(idx:int, stop_at_loop:bool = false)
+Chooses the dialog choice in index `idx` in the current **Dialog Choice** node and then advances based on that. `stop_at_loop` behaves the same as it does in `get_next_dialog`. Evaluates until the next dialog node is reached.
+#### Response
+Returns `false` if you provided an invalid index value (less than 0 or greater than or equal to the choice array's size). Otherwise returns the next dialog node (with the same format described in `get_next_dialog`) or `{"end": true}` if there are none left.
+
+### reset(advance_past_start_node:bool = true):
+Moves back to the **Start Node**. If `advance_past_start_node` is `true`, the `current_node` value will be the node immediately *after* the **Start Node**. If `false`, the `current_node` will be the **Start Node** itself.
+
+### complete()
+**Immediately** evaluates and moves through nodes until an **End Node** or a node with no successors is reached. **Warning:** this can lead to an infinite loop if you have a **Reset Node**.
+
+### get_current_node() -> Dictionary:
+Returns the `current_node` value.
+
+### is_complete() -> bool:
+Returns `true` if the `current_node` is an **End Node** or has no successors. Returns `false` if it s a **Reset Node** or the node has successors.
+
+### step(stop_at_loop:bool = false) -> bool:
+Executes any actions on the current node and moves on to the next node based its results. Returns `false` if this is the last node in the branch, `true` otherwise.
+
+## Properties
+
+### nodes
+A dictionary of all of the tree's nodes. Not recommended to use unless you really want to get into the weeds of it.
+
+### current_node
+A dictionary of the currently active node's information. *Also* not recommended to use unless all of the functions above are insufficient for what you need.
+
+# Example Scenes
+
+### AllExample.tscn
+A scene with a **BranchController** that contains every non-dialog node in it. For seeing how they work.
+
+### Example.tscn
+A basic game with NPCs using multiple **BranchController**s for controlling movement and dialog respectively.
+
+# License
+
+Copyleft, but, like, whatever. If you've read this far and you're some new indie gamedev or something who really thinks this code will help you but for some reason you're very determined not to open source your game for whatever reason, I think that's weird but realistically don't care. If your game or project makes less than $1,000 or something, you can interpret this as me granting you a license to use this code in your proprietary game (with credit). If your project makes more than that, either release its source under a license compatible with the AGPLv3, take my code out of your project, or send me ten bucks.

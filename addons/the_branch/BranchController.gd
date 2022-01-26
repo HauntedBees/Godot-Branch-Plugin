@@ -80,7 +80,7 @@ func get_dialog_choices() -> Array:
 
 func make_dialog_choice(idx:int, stop_at_loop:bool = false):
 	var next_arr:Array = current_node["out"]
-	if next_arr.size() <= idx: return false
+	if idx < 0 || next_arr.size() <= idx: return false
 	current_node = nodes[next_arr[idx]]
 	var current_text := get_dialog_info()
 	if current_text.has("error"): return get_next_dialog(stop_at_loop)
