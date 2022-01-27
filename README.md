@@ -1,6 +1,9 @@
 # Godot 3.4 *The Branch* Plugin
 Dialog Trees, Decision Trees, Behavior Trees, Pine Trees... one plugin for all of the above.
 
+# Use Cases
+*The Branch* Plugin is largely made for building general-purpose trees for workflows such as cutscene scripts, NPC/enemy decision making, dialog, and so on. If your primary goal is to build dialog systems, this plugin is probably overengineered for your use case, and also underengineered, as it does not provide an actual dialog engine, just the logic for moving through dialog trees - the UI must be developed separately. However, if you have a dialog system that is part of a larger workflow that you want to represent in tree form (i.e. "have this NPC walk up to the player" node connects to a dialog node of them saying "hey what's up?"), don't want to combine multiple plugins for several slightly-different systems, and are willing to write some GDScript, this plugin might be for you.
+
 # Installation
 Copy `addons/the_branch` into your project (final path should be `res://addons/the_branch`). In the Godot Editor, go to **Project Settings > Plugins** and enable the **The Branch** plugin. You can now add **BranchController** nodes to your project and modify them with the **Branch Editor**.
 
